@@ -1,0 +1,6 @@
+{
+  "name": "Fluxo Engenharia UFC",
+  "description": "Visualizador de fluxo e pré-requisitos para o curso de Engenharia de Computação da UFC",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

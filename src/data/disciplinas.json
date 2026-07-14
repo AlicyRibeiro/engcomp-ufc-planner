@@ -1,0 +1,974 @@
+[
+  {
+    "id": 1,
+    "codigo": "QXD203",
+    "nome": "Introdução à Engenharia de Computação",
+    "semestre": 1,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 2,
+    "codigo": "QXD0001",
+    "nome": "Fundamentos de Programação",
+    "semestre": 1,
+    "creditos": 6,
+    "cargaHoraria": 96,
+    "prerequisitos": [],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 3,
+    "codigo": "QXD0250",
+    "nome": "Ética Direito e Legislação",
+    "semestre": 1,
+    "creditos": 2,
+    "cargaHoraria": 32,
+    "prerequisitos": [],
+    "area": "Humanas e Gestão"
+  },
+  {
+    "id": 4,
+    "codigo": "QXD0056",
+    "nome": "Matemática Básica",
+    "semestre": 1,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 5,
+    "codigo": "QXD0109",
+    "nome": "Pré-cálculo",
+    "semestre": 1,
+    "creditos": 2,
+    "cargaHoraria": 32,
+    "prerequisitos": [],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 6,
+    "codigo": "QXD0116",
+    "nome": "Álgebra Linear",
+    "semestre": 2,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 7,
+    "codigo": "QXD0005",
+    "nome": "Arquitetura de Computadores",
+    "semestre": 2,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 8,
+    "codigo": "QXD0010",
+    "nome": "Estrutura de dados",
+    "semestre": 2,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0001"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 9,
+    "codigo": "QXD0006",
+    "nome": "Cálculo diferencial e Integral I",
+    "semestre": 2,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0109"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 10,
+    "codigo": "QXD0008",
+    "nome": "Matemática Discreta",
+    "semestre": 2,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0056"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 11,
+    "codigo": "QXD0280",
+    "nome": "Organização de Computadores e Linguagens de Montagem I",
+    "semestre": 3,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0005"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 12,
+    "codigo": "QXD0149",
+    "nome": "Técnicas de Programação para sistemas embarcados I",
+    "semestre": 3,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0010"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 13,
+    "codigo": "QXD0013",
+    "nome": "Sistemas Operacionais",
+    "semestre": 3,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0005"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 14,
+    "codigo": "QXD0134",
+    "nome": "Cálculo Diferencial e Integral II",
+    "semestre": 3,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0006"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 15,
+    "codigo": "QXD0012",
+    "nome": "Probabilidade e Estatística",
+    "semestre": 3,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0056"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 16,
+    "codigo": "QXD0117",
+    "nome": "Circuitos Digitais",
+    "semestre": 3,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 17,
+    "codigo": "QXD0288",
+    "nome": "Organização de Computadores e Linguagens de Montagem II",
+    "semestre": 4,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0280"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 18,
+    "codigo": "QXD0150",
+    "nome": "Técnicas de Programação para Sistemas Embarcados II",
+    "semestre": 4,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0149"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 19,
+    "codigo": "QXD0289",
+    "nome": "Projeto e Implementação de Sistemas Operacionais",
+    "semestre": 4,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0013"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 20,
+    "codigo": "QXD0140",
+    "nome": "Equações Diferenciais",
+    "semestre": 4,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0116"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 21,
+    "codigo": "QXD0135",
+    "nome": "Cálculo Diferencial e Integral III",
+    "semestre": 4,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0006"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 22,
+    "codigo": "QXD0285",
+    "nome": "Sistemas Digitais para Computadores",
+    "semestre": 5,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0117"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 23,
+    "codigo": "QXD0131",
+    "nome": "Análise de Circuitos",
+    "semestre": 5,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0117"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 24,
+    "codigo": "QXD0136",
+    "nome": "Eletricidade e Magnetismo",
+    "semestre": 5,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0140"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 25,
+    "codigo": "QXD0283",
+    "nome": "Engenharia de Software",
+    "semestre": 5,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0135"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 26,
+    "codigo": "QXD0284",
+    "nome": "Projeto Integrado em Engenharia de Computação I",
+    "semestre": 5,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0010"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 27,
+    "codigo": "QXD0143",
+    "nome": "Microcontroladores",
+    "semestre": 5,
+    "creditos": 2,
+    "cargaHoraria": 32,
+    "prerequisitos": [
+      "QXD0288"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 28,
+    "codigo": "QXD0021",
+    "nome": "Redes de Computadores",
+    "semestre": 6,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Redes e Telecom"
+  },
+  {
+    "id": 29,
+    "codigo": "QXD0144",
+    "nome": "Sinais e Sistemas",
+    "semestre": 6,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0008",
+      "QXD0140"
+    ],
+    "area": "Sinais e Controle"
+  },
+  {
+    "id": 30,
+    "codigo": "QXD0137",
+    "nome": "Eletrônica Fundamental I",
+    "semestre": 6,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0131"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 31,
+    "codigo": "QXD0017",
+    "nome": "Lógica para Computação",
+    "semestre": 6,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0008"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 32,
+    "codigo": "QXD0286",
+    "nome": "Engenharia de Software para Sistemas Embarcados",
+    "semestre": 6,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0283"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 33,
+    "codigo": "QXD0287",
+    "nome": "Projeto Integrado em Engenharia de Computação II",
+    "semestre": 6,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0284"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 34,
+    "codigo": "QXD0138",
+    "nome": "Eletrônica Fundamental II",
+    "semestre": 7,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0137"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 35,
+    "codigo": "QXD0043",
+    "nome": "Sistemas Distribuídos",
+    "semestre": 7,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0021"
+    ],
+    "area": "Redes e Telecom"
+  },
+  {
+    "id": 36,
+    "codigo": "QXD0151",
+    "nome": "Sistemas de Automação e Controle",
+    "semestre": 7,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0144"
+    ],
+    "area": "Sinais e Controle"
+  },
+  {
+    "id": 37,
+    "codigo": "QXD0145",
+    "nome": "Sistemas de Tempo-Real",
+    "semestre": 7,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0150"
+    ],
+    "area": "Sinais e Controle"
+  },
+  {
+    "id": 38,
+    "codigo": "QXD0040",
+    "nome": "Linguagens Formais e Autômatos",
+    "semestre": 7,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0008"
+    ],
+    "area": "Matemática e Física"
+  },
+  {
+    "id": 39,
+    "codigo": "QXD0141",
+    "nome": "Instrumentação",
+    "semestre": 8,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0138"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 40,
+    "codigo": "QXD0303",
+    "nome": "Projeto de Sistemas Embarcados",
+    "semestre": 8,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0145"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 41,
+    "codigo": "QXD0219",
+    "nome": "Trabalho de Conclusão de Curso I",
+    "semestre": 9,
+    "creditos": 2,
+    "cargaHoraria": 32,
+    "prerequisitos": [],
+    "area": "Humanas e Gestão"
+  },
+  {
+    "id": 42,
+    "codigo": "QXD0110",
+    "nome": "Projeto de Pesquisa Científica e Tecnológica",
+    "semestre": 9,
+    "creditos": 2,
+    "cargaHoraria": 32,
+    "prerequisitos": [
+      "QXD0145",
+      "QXD0137"
+    ],
+    "area": "Humanas e Gestão"
+  },
+  {
+    "id": 43,
+    "codigo": "QXD0304",
+    "nome": "Trabalho de Conclusão de Curso II",
+    "semestre": 10,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0219"
+    ],
+    "area": "Humanas e Gestão"
+  },
+  {
+    "id": 44,
+    "codigo": "ENCQ0002",
+    "nome": "Atividades Complementares",
+    "semestre": 10,
+    "creditos": 3.75,
+    "cargaHoraria": 60,
+    "prerequisitos": [],
+    "area": "Humanas e Gestão"
+  },
+  {
+    "id": 45,
+    "codigo": "EXT0063",
+    "nome": "Unidade Curricular Especial de Extensão",
+    "semestre": 10,
+    "creditos": 8.25,
+    "cargaHoraria": 132,
+    "prerequisitos": [],
+    "area": "Humanas e Gestão"
+  },
+  {
+    "id": 46,
+    "codigo": "QXD0035",
+    "nome": "Inglês Instrumental I",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 47,
+    "codigo": "QXD0036",
+    "nome": "Inglês Instrumental II",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0035"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 48,
+    "codigo": "QXD0186",
+    "nome": "Cálculo Numérico",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0006",
+      "QXD0116"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 49,
+    "codigo": "QXD0218",
+    "nome": "Fundamentos de Tolerância a Falhas",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0283"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 50,
+    "codigo": "QXD0016",
+    "nome": "Linguagens de Programação",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0007"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 51,
+    "codigo": "QXD0183",
+    "nome": "Computação Paralela",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0013",
+      "QXD0010"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 52,
+    "codigo": "QXD0152",
+    "nome": "Teoria dos Grafos",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0008"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 53,
+    "codigo": "QXD0041",
+    "nome": "Projeto e Análise de Algoritmos",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0008",
+      "QXD0010"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 54,
+    "codigo": "QXD0244",
+    "nome": "Princípios de Comunicação",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0144"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 55,
+    "codigo": "QXD0046",
+    "nome": "Teoria da Computação",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0040"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 56,
+    "codigo": "QXD0119",
+    "nome": "Computação Gráfica",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0116"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 57,
+    "codigo": "QXD0242",
+    "nome": "Protocolos de Comunicação",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0021"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 58,
+    "codigo": "QXD0090",
+    "nome": "Redes de Comunicações Móveis",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0021"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 59,
+    "codigo": "QXD0240",
+    "nome": "Robótica I",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0151"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 60,
+    "codigo": "QXD0241",
+    "nome": "Robótica II",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0240"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 61,
+    "codigo": "QXD0029",
+    "nome": "Empreendedorismo",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 62,
+    "codigo": "QXD0011",
+    "nome": "Fundamentos de Banco de Dados",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 63,
+    "codigo": "QXD0221",
+    "nome": "Interação Humano-Computador",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 64,
+    "codigo": "QXD0176",
+    "nome": "Aprendizado de Máquina",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0012",
+      "QXD0010"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 65,
+    "codigo": "QXD0188",
+    "nome": "Processamento de Imagens",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0116"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 66,
+    "codigo": "QXD0182",
+    "nome": "Visão Computacional",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0116"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 67,
+    "codigo": "QXD0185",
+    "nome": "Análise de Desempenho de Sistemas",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0012"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 68,
+    "codigo": "QXD0025",
+    "nome": "Compiladores",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 69,
+    "codigo": "QXD0243",
+    "nome": "Processamento Digital de Sinais",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0144"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 70,
+    "codigo": "QXD0113",
+    "nome": "Língua Brasileira de Sinais",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 71,
+    "codigo": "QXD0246",
+    "nome": "Relações Étnico-Raciais e Africanidades",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 72,
+    "codigo": "QXD0232",
+    "nome": "Educação Ambiental",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 73,
+    "codigo": "QXD0245",
+    "nome": "Educação em Direitos Humanos",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 74,
+    "codigo": "QXD0180",
+    "nome": "Física I",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0006"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 75,
+    "codigo": "QXD0007",
+    "nome": "Programação Orientada a Objetos",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0001"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 76,
+    "codigo": "QXD0181",
+    "nome": "Pesquisa Operacional",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0041",
+      "QXD0116"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 77,
+    "codigo": "QXD0037",
+    "nome": "Inteligência Artificial",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0017"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 78,
+    "codigo": "QXD0069",
+    "nome": "Segurança",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0021"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 79,
+    "codigo": "QXD0171",
+    "nome": "Otimização Combinatória",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0041",
+      "QXD0116"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 80,
+    "codigo": "QXD0227",
+    "nome": "Introdução à Administração",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 81,
+    "codigo": "QXD0233",
+    "nome": "Finanças",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
+    "area": "Optativas"
+  },
+  {
+    "id": 82,
+    "codigo": "QXD0178",
+    "nome": "Mineração de Dados",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0011",
+      "QXD0012",
+      "QXD0041"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 83,
+    "codigo": "QXD0170",
+    "nome": "Criptografia",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0041"
+    ],
+    "area": "Optativas"
+  },
+  {
+    "id": 84,
+    "codigo": "QXD0088",
+    "nome": "Programação de Script",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0001"
+    ],
+    "area": "Optativas"
+  }
+]
