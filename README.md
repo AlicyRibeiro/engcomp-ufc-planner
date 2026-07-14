@@ -1,20 +1,2 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/44f1ac7d-5bd6-42f0-830d-e7ca1a41a936
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# engcomp-ufc-planner
+Fluxo Engenharia UFC é uma aplicação web que auxilia estudantes de Engenharia de Computação da Universidade Federal do Ceará a visualizar seu progresso acadêmico, consultar pré-requisitos, identificar as próximas disciplinas disponíveis e planejar os próximos semestres de forma interativa.
