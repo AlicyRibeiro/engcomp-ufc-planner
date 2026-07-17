@@ -18,7 +18,7 @@ import '@xyflow/react/dist/style.css';
 import { Disciplina, StatusDisciplina, UserAcademicState } from '../types';
 import { curriculumService } from '../services/curriculumService';
 import { SidebarDetail } from '../components/SidebarDetail';
-import { SlidersHorizontal, BookOpen, Layers, Info, RotateCcw, ChevronDown } from 'lucide-react';
+import { SlidersHorizontal, BookOpen, Layers, Info, RotateCcw, ChevronDown, X } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 
 interface FluxogramaProps {
@@ -195,6 +195,14 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
   // Filters State
   const [selectedArea, setSelectedArea] = useState<string>('all');
   const [selectedSemestreFilter, setSelectedSemestreFilter] = useState<number | 'all'>('all');
+  const [isLegendOpen, setIsLegendOpen] = useState(true);
+
+  // Auto-collapse legend on small screens on mount
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsLegendOpen(false);
+    }
+  }, []);
 
   const areas = useMemo(() => curriculumService.getAreas(), []);
   const semestres = useMemo(() => curriculumService.getSemestres(), []);
@@ -397,7 +405,7 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
             <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Filtrar por Área de Conhecimento:</span>
           </div>
           
-          <div className="flex flex-wrap gap-2 overflow-x-auto pb-1 scrollbar-thin">
+          <div className="flex gap-2 overflow-x-auto pb-2.5 scrollbar-none sm:scrollbar-thin w-full">
             <button
               onClick={() => setSelectedArea('all')}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all duration-300 flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
@@ -432,34 +440,53 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
       </div>
 
       {/* Main Flow Canvas area */}
-      <div className="w-full flex-1 relative min-h-[650px] h-[calc(100vh-240px)] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-100/40 dark:bg-slate-950/40 shadow-inner">
-        {/* Info Banner */}
-        <div className="absolute top-4 left-4 z-10 glass-panel border border-white/20 dark:border-slate-800/30 p-3.5 rounded-xl shadow-md max-w-sm pointer-events-auto">
-          <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1 mb-1.5">
-            <Info className="w-3.5 h-3.5 text-blue-500" />
-            Legenda de Cores
-          </h4>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px]">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              <span className="text-slate-600 dark:text-slate-400 font-medium">Verde: Concluída</span>
+      <div className="w-full flex-1 relative h-[500px] md:h-[calc(100vh-240px)] md:min-h-[650px] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-100/40 dark:bg-slate-950/40 shadow-inner">
+        {/* Info Banner (Collapsible) */}
+        <div className="absolute top-4 left-4 z-10 pointer-events-auto">
+          {!isLegendOpen ? (
+            <button
+              onClick={() => setIsLegendOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-white/90 dark:bg-slate-900/90 border border-slate-200/50 dark:border-slate-800/50 rounded-xl shadow-md text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-850 transition-all cursor-pointer"
+            >
+              <Info className="w-4 h-4 text-blue-500" />
+              <span>Ver Legenda</span>
+            </button>
+          ) : (
+            <div className="glass-panel border border-white/20 dark:border-slate-800/30 p-3.5 rounded-xl shadow-md max-w-sm relative">
+              <button
+                onClick={() => setIsLegendOpen(false)}
+                className="absolute top-2 right-2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                title="Fechar Legenda"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+              <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1 mb-1.5">
+                <Info className="w-3.5 h-3.5 text-blue-500" />
+                Legenda de Cores
+              </h4>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px]">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                  <span className="text-slate-600 dark:text-slate-400 font-medium">Verde: Concluída</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                  <span className="text-slate-600 dark:text-slate-400 font-medium">Amarelo: Cursando</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                  <span className="text-slate-600 dark:text-slate-400 font-medium">Azul: Disponível</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-400 dark:bg-slate-700"></span>
+                  <span className="text-slate-600 dark:text-slate-400 font-medium">Cinza: Bloqueada</span>
+                </div>
+              </div>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-2.5 leading-tight italic pr-4">
+                * Arraste o mapa para navegar, pinça/roda para zoom, clique em disciplinas para ver detalhes e atualizar!
+              </p>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-              <span className="text-slate-600 dark:text-slate-400 font-medium">Amarelo: Cursando</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-              <span className="text-slate-600 dark:text-slate-400 font-medium">Azul: Disponível</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-400 dark:bg-slate-700"></span>
-              <span className="text-slate-600 dark:text-slate-400 font-medium">Cinza: Bloqueada</span>
-            </div>
-          </div>
-          <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-2.5 leading-tight italic">
-            * Dica: Arraste o mapa para navegar, use a roda do mouse para zoom, e clique em qualquer disciplina para ver detalhes e atualizar seu histórico!
-          </p>
+          )}
         </div>
 
         <div className="absolute inset-0 z-0">

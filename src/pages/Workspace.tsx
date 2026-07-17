@@ -15,7 +15,8 @@ import {
   Layers,
   Search,
   BookMarked,
-  MapPin
+  MapPin,
+  Printer
 } from 'lucide-react';
 import { Disciplina, UserAcademicState, CursoStats } from '../types';
 import { curriculumService } from '../services/curriculumService';
@@ -23,6 +24,7 @@ import { SubjectSearch } from '../components/SubjectSearch';
 import { SubjectCard } from '../components/SubjectCard';
 import { AvailableSubjectCard } from '../components/AvailableSubjectCard';
 import { StatCard } from '../components/StatCard';
+import { AcademicReportModal } from '../components/AcademicReportModal';
 
 interface WorkspaceProps {
   disciplinas: Disciplina[];
@@ -49,6 +51,7 @@ export function Workspace({
   const [areaFilter, setAreaFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'available' | 'all'>('available');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
 
   const areas = useMemo(() => curriculumService.getAreas(), []);
   const semestres = useMemo(() => curriculumService.getSemestres(), []);
@@ -192,20 +195,29 @@ export function Workspace({
 
           {/* Section: Academic History Control */}
           <div className="glass-panel rounded-2xl p-5 shadow-sm space-y-5">
-            <div className="flex justify-between items-center pb-2 border-b border-slate-200/20 dark:border-slate-800/60">
+            <div className="flex justify-between items-center pb-2 border-b border-slate-200/20 dark:border-slate-800/60 gap-2 flex-wrap">
               <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <BookMarked className="w-4 h-4 text-blue-500" />
                 Histórico Acadêmico
               </h3>
-              {(academicState.concluidas.length > 0 || academicState.cursando.length > 0) && (
+              <div className="flex items-center gap-2">
                 <button
-                  onClick={() => setShowClearConfirm(true)}
-                  className="text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-bold flex items-center gap-1 transition-colors px-2 py-1 hover:bg-red-500/10 dark:hover:bg-red-950/20 rounded-lg cursor-pointer"
+                  onClick={() => setShowReportModal(true)}
+                  className="text-xs text-blue-600 dark:text-blue-400 font-bold flex items-center gap-1 transition-all px-2.5 py-1.5 bg-blue-500/10 dark:bg-blue-500/10 hover:bg-blue-500/20 dark:hover:bg-blue-500/20 rounded-lg cursor-pointer"
                 >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  Limpar Tudo
+                  <Printer className="w-3.5 h-3.5" />
+                  Relatório
                 </button>
-              )}
+                {(academicState.concluidas.length > 0 || academicState.cursando.length > 0) && (
+                  <button
+                    onClick={() => setShowClearConfirm(true)}
+                    className="text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-bold flex items-center gap-1 transition-colors px-2 py-1.5 hover:bg-red-500/10 dark:hover:bg-red-950/20 rounded-lg cursor-pointer"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    Limpar
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Subject Autocomplete Search */}
@@ -446,6 +458,15 @@ export function Workspace({
           </div>
         </div>
       )}
+
+      {/* Academic Report Export Modal */}
+      <AcademicReportModal
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        academicState={academicState}
+        stats={stats}
+        disciplinas={disciplinas}
+      />
     </div>
   );
 }

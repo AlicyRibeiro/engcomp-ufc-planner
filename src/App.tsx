@@ -196,31 +196,11 @@ export default function App() {
           >
             {isDark ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-slate-700" />}
           </button>
-
-          {/* Mobile view switch buttons */}
-          {view !== 'home' && (
-            <div className="sm:hidden flex items-center gap-1 bg-white/40 dark:bg-slate-800/30 p-1 rounded-xl border border-white/40 dark:border-slate-800/20 backdrop-blur-md">
-              <button
-                onClick={() => setView('workspace')}
-                className={`p-1.5 rounded-lg ${view === 'workspace' ? 'bg-white/80 dark:bg-slate-950/80 text-blue-600 dark:text-blue-400 shadow-xs' : 'text-slate-500'}`}
-                title="Grade e Próximas"
-              >
-                <BookOpen className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setView('fluxograma')}
-                className={`p-1.5 rounded-lg ${view === 'fluxograma' ? 'bg-white/80 dark:bg-slate-950/80 text-blue-600 dark:text-blue-400 shadow-xs' : 'text-slate-500'}`}
-                title="Fluxograma"
-              >
-                <GitFork className="w-4 h-4" />
-              </button>
-            </div>
-          )}
         </div>
       </header>
 
       {/* Main Page Area */}
-      <main className="flex-1 flex flex-col h-full relative z-10">
+      <main className={`flex-1 flex flex-col h-full relative z-10 ${view !== 'home' ? 'pb-16 sm:pb-0' : ''}`}>
         {view === 'home' && (
           <Home onStart={handleStart} />
         )}
@@ -344,6 +324,17 @@ export default function App() {
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pl-7">
                   Você não precisa criar nenhuma conta. Todos os dados que você atualizar são salvos de forma segura e imediata na memória do seu próprio navegador (LocalStorage). Você pode voltar quando quiser e suas alterações continuarão aqui!
+                </p>
+              </div>
+
+              {/* Step 5 */}
+              <div className="space-y-2">
+                <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-mono font-bold">5</span>
+                  Exportação de Relatório Acadêmico (PDF / Imagem)
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pl-7">
+                  Agora você pode exportar um relatório de desempenho acadêmico oficial e planejado! Na aba <b>Workspace</b>, clique no botão <b>"Relatório"</b> ao lado de "Histórico Acadêmico". Insira seu nome, matrícula e semestre de referência para gerar um arquivo PDF ou imagem (PNG) de alta qualidade, pronto para impressão ou compartilhamento com a coordenação.
                 </p>
               </div>
             </div>
@@ -516,6 +507,34 @@ export default function App() {
             )}
 
           </div>
+        </div>
+      )}
+
+      {/* Mobile Bottom Navigation Bar */}
+      {view !== 'home' && (
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/50 dark:border-slate-800/50 px-6 py-2 flex justify-around items-center shadow-lg">
+          <button
+            onClick={() => setView('workspace')}
+            className={`flex flex-col items-center gap-1 py-1.5 px-3 text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+              view === 'workspace'
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-slate-400 dark:text-slate-500'
+            }`}
+          >
+            <BookOpen className="w-5 h-5" />
+            <span>Grade & Sugeridas</span>
+          </button>
+          <button
+            onClick={() => setView('fluxograma')}
+            className={`flex flex-col items-center gap-1 py-1.5 px-3 text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
+              view === 'fluxograma'
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-slate-400 dark:text-slate-500'
+            }`}
+          >
+            <GitFork className="w-5 h-5" />
+            <span>Fluxograma</span>
+          </button>
         </div>
       )}
     </div>
