@@ -35,13 +35,6 @@ export function useAcademicState() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(academicState));
   }, [academicState]);
 
-  const changePpc = (ppc: '2017' | '2023') => {
-    setAcademicState(prev => ({
-      ...prev,
-      ppc
-    }));
-  };
-
   const toggleConcluida = (codigo: string) => {
     setAcademicState(prev => {
       const isConcluida = prev.concluidas.includes(codigo);
@@ -151,7 +144,6 @@ export function useAcademicState() {
     removerDisciplina,
     limparHistorico,
     importHistorico,
-    changePpc,
     stats,
   };
 }

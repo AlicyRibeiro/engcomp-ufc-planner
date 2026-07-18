@@ -85,7 +85,6 @@ export default function App() {
     removerDisciplina,
     limparHistorico,
     importHistorico,
-    changePpc,
     stats
   } = useAcademicState();
 
@@ -166,21 +165,6 @@ export default function App() {
             </div>
           )}
 
-          {/* PPC Selector dropdown */}
-          {view !== 'home' && (
-            <div className="flex items-center gap-1 bg-slate-100/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/80 rounded-xl px-2.5 py-1.5 backdrop-blur-md shadow-2xs mr-1">
-              <span className="hidden lg:inline text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider select-none pr-1">PPC:</span>
-              <select
-                value={academicState.ppc || '2023'}
-                onChange={(e) => changePpc(e.target.value as '2017' | '2023')}
-                className="bg-transparent border-none text-xs font-extrabold focus:outline-none cursor-pointer text-slate-700 dark:text-slate-300 pr-1 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
-              >
-                <option value="2023" className="bg-white dark:bg-slate-950 font-sans">PPC 2023</option>
-                <option value="2017" className="bg-white dark:bg-slate-950 font-sans">PPC 2017</option>
-              </select>
-            </div>
-          )}
-
           {/* Help / Como Funciona */}
           <button
             onClick={() => setShowHelp(true)}
@@ -224,7 +208,7 @@ export default function App() {
 
         {view === 'workspace' && (
           <Workspace
-            disciplinas={curriculumService.getTodas(academicState.ppc)}
+            disciplinas={curriculumService.getTodas()}
             academicState={academicState}
             stats={stats}
             onAdd={setDisciplinaStatus}
@@ -237,7 +221,7 @@ export default function App() {
 
         {view === 'fluxograma' && (
           <Fluxograma
-            disciplinas={curriculumService.getTodas(academicState.ppc)}
+            disciplinas={curriculumService.getTodas()}
             academicState={academicState}
             onStatusChange={setDisciplinaStatus}
           />

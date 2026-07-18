@@ -58,8 +58,8 @@ export function Workspace({
   const [showReportModal, setShowReportModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
 
-  const areas = useMemo(() => curriculumService.getAreas(academicState.ppc), [academicState.ppc]);
-  const semestres = useMemo(() => curriculumService.getSemestres(academicState.ppc), [academicState.ppc]);
+  const areas = useMemo(() => curriculumService.getAreas(), []);
+  const semestres = useMemo(() => curriculumService.getSemestres(), []);
 
   // Calculate available disciplines
   const availableDisciplinas = useMemo(() => {

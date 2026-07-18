@@ -205,8 +205,8 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
     }
   }, []);
 
-  const areas = useMemo(() => curriculumService.getAreas(academicState.ppc), [academicState.ppc]);
-  const semestres = useMemo(() => curriculumService.getSemestres(academicState.ppc), [academicState.ppc]);
+  const areas = useMemo(() => curriculumService.getAreas(), []);
+  const semestres = useMemo(() => curriculumService.getSemestres(), []);
 
   // Node & Edge Generation
   const initialNodes = useMemo<CustomDisciplinaNode[]>(() => {
