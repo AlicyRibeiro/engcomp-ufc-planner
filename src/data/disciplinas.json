@@ -207,7 +207,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0013"
+      "QXD0013",
+      "QXD0010"
     ],
     "area": "Hardware e Sistemas"
   },
@@ -219,7 +220,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0116"
+      "QXD0116",
+      "QXD0006"
     ],
     "area": "Matemática e Física"
   },
@@ -231,7 +233,7 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0006"
+      "QXD0134"
     ],
     "area": "Matemática e Física"
   },
@@ -255,7 +257,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0117"
+      "QXD0117",
+      "QXD0140"
     ],
     "area": "Hardware e Sistemas"
   },
@@ -267,7 +270,7 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0140"
+      "QXD0135"
     ],
     "area": "Matemática e Física"
   },
@@ -279,7 +282,7 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0135"
+      "QXD0010"
     ],
     "area": "Programação e Software"
   },
@@ -969,6 +972,72 @@
     "prerequisitos": [
       "QXD0001"
     ],
+    "area": "Optativas"
+  },
+  {
+    "id": 85,
+    "codigo": "QXD0103",
+    "nome": "Ética, Direito e Legislação",
+    "semestre": 1,
+    "creditos": 2,
+    "cargaHoraria": 32,
+    "prerequisitos": [],
+    "area": "Humanas e Gestão"
+  },
+  {
+    "id": 86,
+    "codigo": "QXD0118",
+    "nome": "Introdução à Engenharia de Computação",
+    "semestre": 1,
+    "creditos": 2,
+    "cargaHoraria": 32,
+    "prerequisitos": [],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 87,
+    "codigo": "QXD0148",
+    "nome": "Sistemas Operacionais II",
+    "semestre": 6,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0013"
+    ],
+    "area": "Sistemas de Computação"
+  },
+  {
+    "id": 88,
+    "codigo": "QXD0146",
+    "nome": "Sistemas Digitais para Computadores",
+    "semestre": 5,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0117"
+    ],
+    "area": "Hardware e Sistemas"
+  },
+  {
+    "id": 89,
+    "codigo": "QXD0252",
+    "nome": "Engenharia de Software",
+    "semestre": 5,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [
+      "QXD0010"
+    ],
+    "area": "Programação e Software"
+  },
+  {
+    "id": 90,
+    "codigo": "QXD0343",
+    "nome": "Ondas e Antenas",
+    "semestre": null,
+    "creditos": 4,
+    "cargaHoraria": 64,
+    "prerequisitos": [],
     "area": "Optativas"
   }
 ]

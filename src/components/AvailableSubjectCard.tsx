@@ -1,6 +1,6 @@
 import { BookOpen, Check, ArrowRight, Clock, Lock, Unlock, CheckCircle, Trash2 } from 'lucide-react';
 import { Disciplina, StatusDisciplina } from '../types';
-import { curriculumService } from '../services/curriculumService';
+import { curriculumService, EQUIVALENCIAS } from '../services/curriculumService';
 
 interface AvailableSubjectCardProps {
   key?: string;
@@ -9,6 +9,7 @@ interface AvailableSubjectCardProps {
   onMarkConcluida: (codigo: string) => void;
   onMarkCursando: (codigo: string) => void;
   onRemove?: (codigo: string) => void;
+  concluidas?: string[];
 }
 
 const areaColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -21,7 +22,7 @@ const areaColors: Record<string, { bg: string; text: string; border: string }> =
   "Optativas": { bg: "bg-slate-500/10 dark:bg-slate-500/5", text: "text-slate-700 dark:text-slate-300", border: "border-slate-500/20 dark:border-slate-500/10" }
 };
 
-export function AvailableSubjectCard({ disciplina, status, onMarkConcluida, onMarkCursando, onRemove }: AvailableSubjectCardProps) {
+export function AvailableSubjectCard({ disciplina, status, onMarkConcluida, onMarkCursando, onRemove, concluidas }: AvailableSubjectCardProps) {
   // Look up full names of prerequisites
   const getPrereqNames = (prereqs: string[]) => {
     return prereqs.map(code => {
@@ -76,6 +77,15 @@ export function AvailableSubjectCard({ disciplina, status, onMarkConcluida, onMa
               <span className="font-mono text-[10px] font-bold bg-blue-500/10 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-500/20 px-1.5 py-0.5 rounded backdrop-blur-xs">
                 {disciplina.codigo}
               </span>
+              {(() => {
+                const equivs = EQUIVALENCIAS[disciplina.codigo] || [];
+                if (equivs.length === 0) return null;
+                return (
+                  <span className="font-mono text-[9px] font-bold bg-slate-500/10 dark:bg-slate-500/15 text-slate-600 dark:text-slate-400 border border-slate-500/25 px-1.5 py-0.5 rounded backdrop-blur-xs cursor-help" title={`Esta disciplina possui equivalência curricular com: ${equivs.join(', ')}`}>
+                    Equiv: {equivs.join(', ')}
+                  </span>
+                );
+              })()}
               <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
                 {disciplina.semestre ? `${disciplina.semestre}º Semestre recomendado` : 'Optativa'}
               </span>
@@ -107,15 +117,31 @@ export function AvailableSubjectCard({ disciplina, status, onMarkConcluida, onMa
             <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider block mb-1.5">
               Pré-requisitos ({prereqDetails.length})
             </span>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1.5">
               {prereqDetails.map(pr => {
-                const isPrereqConcluido = curriculumService.getByCodigo(pr.codigo) && 
-                  curriculumService.getStatus(curriculumService.getByCodigo(pr.codigo)!, { concluidas: [pr.codigo], cursando: [] }) === 'concluida'; // check if is in history is simple here
+                const isPrereqConcluido = concluidas ? concluidas.includes(pr.codigo) : false;
                 return (
-                  <div key={pr.codigo} className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400">
-                    <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                    <span className="font-mono text-[10px] text-slate-500 bg-slate-100/40 dark:bg-slate-800/40 px-1 py-0.2 rounded font-medium border border-slate-200/10 dark:border-slate-800/10">{pr.codigo}</span>
+                  <div key={pr.codigo} className={`flex items-center gap-1.5 text-xs transition-colors ${
+                    isPrereqConcluido 
+                      ? "text-slate-600 dark:text-slate-400" 
+                      : "text-slate-400 dark:text-slate-500/80 font-medium"
+                  }`}>
+                    {isPrereqConcluido ? (
+                      <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    ) : (
+                      <Lock className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 shrink-0" />
+                    )}
+                    <span className={`font-mono text-[10px] px-1 py-0.2 rounded font-medium border ${
+                      isPrereqConcluido
+                        ? "text-slate-500 bg-slate-100/40 dark:bg-slate-800/40 border-slate-200/10 dark:border-slate-800/10"
+                        : "text-red-400 dark:text-red-500/80 bg-red-500/5 border-red-500/10"
+                    }`}>
+                      {pr.codigo}
+                    </span>
                     <span className="truncate">{pr.nome}</span>
+                    {!isPrereqConcluido && (
+                      <span className="text-[9px] font-bold text-red-400 dark:text-red-500/80 uppercase ml-auto bg-red-500/5 px-1 rounded shrink-0">Pendente</span>
+                    )}
                   </div>
                 );
               })}

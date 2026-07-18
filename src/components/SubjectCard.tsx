@@ -1,5 +1,6 @@
 import { Trash2, MoveRight, CheckCircle, Clock } from 'lucide-react';
 import { Disciplina } from '../types';
+import { EQUIVALENCIAS } from '../services/curriculumService';
 
 interface SubjectCardProps {
   key?: string;
@@ -30,6 +31,15 @@ export function SubjectCard({ disciplina, status, onRemove, onSwitchStatus }: Su
           <span className="font-mono text-[10px] font-semibold bg-white/40 dark:bg-slate-800/40 text-slate-600 dark:text-slate-400 border border-white/20 dark:border-slate-800/10 px-1.5 py-0.5 rounded backdrop-blur-xs">
             {disciplina.codigo}
           </span>
+          {(() => {
+            const equivs = EQUIVALENCIAS[disciplina.codigo] || [];
+            if (equivs.length === 0) return null;
+            return (
+              <span className="font-mono text-[9px] font-bold bg-slate-500/10 dark:bg-slate-500/15 text-slate-600 dark:text-slate-400 border border-slate-500/25 px-1.5 py-0.5 rounded backdrop-blur-xs cursor-help" title={`Equivalente a: ${equivs.join(', ')}`}>
+                Equiv: {equivs.join(', ')}
+              </span>
+            );
+          })()}
           <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-semibold border ${areaColorsConfig.bg} ${areaColorsConfig.text} ${areaColorsConfig.border}`}>
             {disciplina.area}
           </span>

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Search, PlusCircle, CheckCircle, Clock, BookOpen, AlertCircle } from 'lucide-react';
 import { Disciplina, UserAcademicState } from '../types';
-import { curriculumService } from '../services/curriculumService';
+import { curriculumService, isCompletada, isCursando } from '../services/curriculumService';
 
 interface SubjectSearchProps {
   disciplinas: Disciplina[];
@@ -39,12 +39,12 @@ export function SubjectSearch({ disciplinas, academicState, onAdd }: SubjectSear
       }).slice(0, 8); // Limit search results to 8 for UI cleanliness
 
   const isAlreadyAdded = (codigo: string) => {
-    return academicState.concluidas.includes(codigo) || academicState.cursando.includes(codigo);
+    return isCompletada(codigo, academicState.concluidas) || isCursando(codigo, academicState.cursando);
   };
 
   const getAddedStatus = (codigo: string): 'concluida' | 'cursando' | null => {
-    if (academicState.concluidas.includes(codigo)) return 'concluida';
-    if (academicState.cursando.includes(codigo)) return 'cursando';
+    if (isCompletada(codigo, academicState.concluidas)) return 'concluida';
+    if (isCursando(codigo, academicState.cursando)) return 'cursando';
     return null;
   };
 

@@ -7,6 +7,7 @@ const LOCAL_STORAGE_KEY = 'fluxo_eng_ufc_academic_state';
 const defaultState: UserAcademicState = {
   concluidas: [],
   cursando: [],
+  ppc: '2023',
 };
 
 export function useAcademicState() {
@@ -16,7 +17,11 @@ export function useAcademicState() {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed.concluidas) && Array.isArray(parsed.cursando)) {
-          return parsed;
+          return {
+            concluidas: parsed.concluidas,
+            cursando: parsed.cursando,
+            ppc: parsed.ppc || '2023'
+          };
         }
       }
     } catch (e) {
@@ -29,6 +34,13 @@ export function useAcademicState() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(academicState));
   }, [academicState]);
+
+  const changePpc = (ppc: '2017' | '2023') => {
+    setAcademicState(prev => ({
+      ...prev,
+      ppc
+    }));
+  };
 
   const toggleConcluida = (codigo: string) => {
     setAcademicState(prev => {
@@ -103,6 +115,32 @@ export function useAcademicState() {
     setAcademicState(defaultState);
   };
 
+  const importHistorico = (newState: UserAcademicState, strategy: 'merge' | 'replace') => {
+    setAcademicState(prev => {
+      if (strategy === 'replace') {
+        return newState;
+      } else {
+        const prevConcluidas = prev.concluidas || [];
+        const prevCursando = prev.cursando || [];
+        
+        const newConcluidas = newState.concluidas || [];
+        const newCursando = newState.cursando || [];
+
+        // Build unique lists
+        const mergedConcluidas = Array.from(new Set([...prevConcluidas, ...newConcluidas]));
+        let mergedCursando = Array.from(new Set([...prevCursando, ...newCursando]));
+        
+        // Remove any cursando that is now concluida
+        mergedCursando = mergedCursando.filter(c => !mergedConcluidas.includes(c));
+
+        return {
+          concluidas: mergedConcluidas,
+          cursando: mergedCursando
+        };
+      }
+    });
+  };
+
   const stats = curriculumService.calculateStats(academicState);
 
   return {
@@ -112,6 +150,8 @@ export function useAcademicState() {
     setDisciplinaStatus,
     removerDisciplina,
     limparHistorico,
+    importHistorico,
+    changePpc,
     stats,
   };
 }

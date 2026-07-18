@@ -16,7 +16,8 @@ import {
   Search,
   BookMarked,
   MapPin,
-  Printer
+  Printer,
+  Upload
 } from 'lucide-react';
 import { Disciplina, UserAcademicState, CursoStats } from '../types';
 import { curriculumService } from '../services/curriculumService';
@@ -25,6 +26,7 @@ import { SubjectCard } from '../components/SubjectCard';
 import { AvailableSubjectCard } from '../components/AvailableSubjectCard';
 import { StatCard } from '../components/StatCard';
 import { AcademicReportModal } from '../components/AcademicReportModal';
+import { ImportTranscriptModal } from '../components/ImportTranscriptModal';
 
 interface WorkspaceProps {
   disciplinas: Disciplina[];
@@ -34,6 +36,7 @@ interface WorkspaceProps {
   onRemove: (codigo: string) => void;
   onSwitchStatus: (codigo: string, status: 'concluida' | 'cursando') => void;
   onClear: () => void;
+  onImport: (newState: UserAcademicState, strategy: 'merge' | 'replace') => void;
 }
 
 export function Workspace({ 
@@ -43,7 +46,8 @@ export function Workspace({
   onAdd, 
   onRemove, 
   onSwitchStatus, 
-  onClear 
+  onClear,
+  onImport
 }: WorkspaceProps) {
   
   // Workspace-specific filters for the available and completed disciplines
@@ -52,9 +56,10 @@ export function Workspace({
   const [viewMode, setViewMode] = useState<'available' | 'all'>('available');
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showImportModal, setShowImportModal] = useState(false);
 
-  const areas = useMemo(() => curriculumService.getAreas(), []);
-  const semestres = useMemo(() => curriculumService.getSemestres(), []);
+  const areas = useMemo(() => curriculumService.getAreas(academicState.ppc), [academicState.ppc]);
+  const semestres = useMemo(() => curriculumService.getSemestres(academicState.ppc), [academicState.ppc]);
 
   // Calculate available disciplines
   const availableDisciplinas = useMemo(() => {
@@ -68,23 +73,63 @@ export function Workspace({
   // Filter available disciplines based on filters selected and sort by semester ascending
   const filteredAvailable = useMemo(() => {
     const sourceList = viewMode === 'available' ? availableDisciplinas : disciplinas;
-    return sourceList
-      .filter(d => {
-        const matchesSemester = semesterFilter === 'all' || d.semestre === semesterFilter;
-        const matchesArea = areaFilter === 'all' || d.area === areaFilter;
-        return matchesSemester && matchesArea;
-      })
-      .sort((a, b) => {
-        if (a.semestre !== b.semestre) {
-          return a.semestre - b.semestre;
+    const filtered = sourceList.filter(d => {
+      const matchesSemester = semesterFilter === 'all' || d.semestre === semesterFilter;
+      const matchesArea = areaFilter === 'all' || d.area === areaFilter;
+      return matchesSemester && matchesArea;
+    });
+
+    const sorted = [...filtered].sort((a, b) => {
+      if (a.semestre !== b.semestre) {
+        const semA = typeof a.semestre === 'number' ? a.semestre : 99;
+        const semB = typeof b.semestre === 'number' ? b.semestre : 99;
+        return semA - semB;
+      }
+      return a.nome.localeCompare(b.nome);
+    });
+
+    if (viewMode === 'available') {
+      const seenNames = new Set<string>();
+      return sorted.filter(d => {
+        if (seenNames.has(d.nome)) {
+          return false;
         }
-        return a.nome.localeCompare(b.nome);
+        seenNames.add(d.nome);
+        return true;
       });
+    }
+
+    return sorted;
   }, [availableDisciplinas, disciplinas, semesterFilter, areaFilter, viewMode]);
+
+  // Group filtered disciplines by semester
+  const groupedDisciplinas = useMemo(() => {
+    const groups: Record<string, Disciplina[]> = {};
+    filteredAvailable.forEach(d => {
+      const semLabel = d.semestre ? `${d.semestre}º Semestre` : 'Optativas';
+      if (!groups[semLabel]) {
+        groups[semLabel] = [];
+      }
+      groups[semLabel].push(d);
+    });
+
+    // Create sorted entries directly
+    const sortedEntries = Object.entries(groups).sort(([a], [b]) => {
+      if (a === 'Optativas') return 1;
+      if (b === 'Optativas') return -1;
+      const numA = parseInt(a, 10);
+      const numB = parseInt(b, 10);
+      if (isNaN(numA)) return 1;
+      if (isNaN(numB)) return -1;
+      return numA - numB;
+    });
+
+    return sortedEntries;
+  }, [filteredAvailable]);
 
   // Resolve subjects objects for lists
   const concluidasSubjects = useMemo(() => {
-    return academicState.concluidas
+    return (academicState.concluidas || [])
       .map(code => curriculumService.getByCodigo(code))
       .filter((d): d is Disciplina => d !== undefined)
       .sort((a, b) => {
@@ -95,7 +140,7 @@ export function Workspace({
   }, [academicState.concluidas]);
 
   const cursandoSubjects = useMemo(() => {
-    return academicState.cursando
+    return (academicState.cursando || [])
       .map(code => curriculumService.getByCodigo(code))
       .filter((d): d is Disciplina => d !== undefined)
       .sort((a, b) => {
@@ -193,6 +238,8 @@ export function Workspace({
             </div>
           </div>
 
+
+
           {/* Section: Academic History Control */}
           <div className="glass-panel rounded-2xl p-5 shadow-sm space-y-5">
             <div className="flex justify-between items-center pb-2 border-b border-slate-200/20 dark:border-slate-800/60 gap-2 flex-wrap">
@@ -201,6 +248,14 @@ export function Workspace({
                 Histórico Acadêmico
               </h3>
               <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowImportModal(true)}
+                  className="text-xs text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1 transition-all px-2.5 py-1.5 bg-emerald-500/10 dark:bg-emerald-500/10 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-lg cursor-pointer"
+                  title="Importar Histórico do SIGAA"
+                >
+                  <Upload className="w-3.5 h-3.5" />
+                  Importar
+                </button>
                 <button
                   onClick={() => setShowReportModal(true)}
                   className="text-xs text-blue-600 dark:text-blue-400 font-bold flex items-center gap-1 transition-all px-2.5 py-1.5 bg-blue-500/10 dark:bg-blue-500/10 hover:bg-blue-500/20 dark:hover:bg-blue-500/20 rounded-lg cursor-pointer"
@@ -402,24 +457,32 @@ export function Workspace({
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[680px] overflow-y-auto pr-1">
-                {filteredAvailable.map(d => (
-                  <AvailableSubjectCard
-                    key={d.codigo}
-                    disciplina={d}
-                    status={
-                      academicState.concluidas.includes(d.codigo)
-                        ? 'concluida'
-                        : academicState.cursando.includes(d.codigo)
-                        ? 'cursando'
-                        : availableDisciplinas.some(av => av.codigo === d.codigo)
-                        ? 'disponivel'
-                        : 'bloqueada'
-                    }
-                    onMarkConcluida={handleQuickMarkConcluida}
-                    onMarkCursando={handleQuickMarkCursando}
-                    onRemove={onRemove}
-                  />
+              <div className="space-y-6 max-h-[680px] overflow-y-auto pr-1">
+                {groupedDisciplinas.map(([semesterLabel, subjects]) => (
+                  <div key={semesterLabel} className="space-y-3">
+                    <div className="flex items-center gap-2 sticky top-0 bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-md py-1.5 z-10">
+                      <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                        {semesterLabel}
+                      </span>
+                      <div className="h-px flex-1 bg-slate-200/40 dark:bg-slate-800/60" />
+                      <span className="text-[10px] bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full font-semibold text-slate-500 dark:text-slate-400">
+                        {subjects.length} {subjects.length === 1 ? 'disciplina' : 'disciplinas'}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {subjects.map(d => (
+                        <AvailableSubjectCard
+                          key={d.codigo}
+                          disciplina={d}
+                          status={curriculumService.getStatus(d, academicState)}
+                          concluidas={academicState.concluidas}
+                          onMarkConcluida={handleQuickMarkConcluida}
+                          onMarkCursando={handleQuickMarkCursando}
+                          onRemove={onRemove}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
@@ -466,6 +529,15 @@ export function Workspace({
         academicState={academicState}
         stats={stats}
         disciplinas={disciplinas}
+      />
+
+      {/* Import Transcript Modal */}
+      <ImportTranscriptModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        disciplinas={disciplinas}
+        academicState={academicState}
+        onImport={onImport}
       />
     </div>
   );

@@ -14,6 +14,7 @@ export type StatusDisciplina = 'concluida' | 'cursando' | 'disponivel' | 'bloque
 export interface UserAcademicState {
   concluidas: string[]; // codigos das disciplinas concluidas
   cursando: string[];   // codigos das disciplinas cursando
+  ppc?: '2017' | '2023';
 }
 
 export interface CursoStats {
@@ -23,4 +24,13 @@ export interface CursoStats {
   creditosRestantes: number;
   cargaHorariaConcluida: number;
   estimativaSemestresRestantes: number;
+  cargaHorariaStats: CargaHorariaCategory[];
+}
+
+export interface CargaHorariaCategory {
+  nome: string;
+  exigido: number;
+  integralizado: number;
+  computavel: number;
+  pendente: number;
 }

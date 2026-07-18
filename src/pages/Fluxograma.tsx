@@ -16,9 +16,9 @@ import {
 import '@xyflow/react/dist/style.css';
 
 import { Disciplina, StatusDisciplina, UserAcademicState } from '../types';
-import { curriculumService } from '../services/curriculumService';
+import { curriculumService, isCompletada } from '../services/curriculumService';
 import { SidebarDetail } from '../components/SidebarDetail';
-import { SlidersHorizontal, BookOpen, Layers, Info, RotateCcw, ChevronDown, X } from 'lucide-react';
+import { SlidersHorizontal, BookOpen, Layers, Info, RotateCcw, ChevronDown, X, GitFork } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 
 interface FluxogramaProps {
@@ -196,6 +196,7 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
   const [selectedArea, setSelectedArea] = useState<string>('all');
   const [selectedSemestreFilter, setSelectedSemestreFilter] = useState<number | 'all'>('all');
   const [isLegendOpen, setIsLegendOpen] = useState(true);
+  const [showOnlySelectedEdges, setShowOnlySelectedEdges] = useState<boolean>(true);
 
   // Auto-collapse legend on small screens on mount
   useEffect(() => {
@@ -204,8 +205,8 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
     }
   }, []);
 
-  const areas = useMemo(() => curriculumService.getAreas(), []);
-  const semestres = useMemo(() => curriculumService.getSemestres(), []);
+  const areas = useMemo(() => curriculumService.getAreas(academicState.ppc), [academicState.ppc]);
+  const semestres = useMemo(() => curriculumService.getSemestres(academicState.ppc), [academicState.ppc]);
 
   // Node & Edge Generation
   const initialNodes = useMemo<CustomDisciplinaNode[]>(() => {
@@ -283,44 +284,75 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
         // Only add edge if the prerequisite node is also active
         if (!activeCodigos.has(pre)) return;
 
-        const sourceStatus = academicState.concluidas.includes(pre) ? 'concluida' : 'incompleta';
+        const sourceStatus = isCompletada(pre, academicState.concluidas) ? 'concluida' : 'incompleta';
         const targetStatus = curriculumService.getStatus(d, academicState);
         
         let edgeColor = isDark ? '#475569' : '#94a3b8'; // default slate-600 in dark, slate-400 in light
         let edgeWidth = 1.5;
         let animated = false;
+        let edgeOpacity = 1.0;
 
         if (sourceStatus === 'concluida' && (targetStatus === 'concluida' || targetStatus === 'cursando')) {
           edgeColor = isDark ? '#10b981' : '#059669'; // emerald-500 in dark, emerald-600 in light
-          edgeWidth = 2.5;
+          edgeWidth = 2.0;
         } else if (sourceStatus === 'concluida' && targetStatus === 'disponivel') {
           edgeColor = isDark ? '#3b82f6' : '#2563eb'; // blue-500 in dark, blue-600 in light
-          edgeWidth = 2.5;
+          edgeWidth = 2.0;
           animated = true;
         } else if (sourceStatus === 'incompleta') {
           edgeColor = isDark ? '#334155' : '#cbd5e1'; // dark slate in dark mode, light slate in light mode
           edgeWidth = 1.2;
         }
 
-        edgesList.push({
-          id: `edge-${pre}-${d.codigo}`,
-          source: pre,
-          target: d.codigo,
-          type: 'smoothstep',
-          animated,
-          style: { stroke: edgeColor, strokeWidth: edgeWidth },
-          markerEnd: {
-            type: MarkerType.ArrowClosed,
-            width: 15,
-            height: 15,
-            color: edgeColor
+        // Filter or style based on selected node connections
+        const isRelatedToSelection = selectedDisciplina 
+          ? (pre === selectedDisciplina.codigo || d.codigo === selectedDisciplina.codigo)
+          : false;
+
+        if (showOnlySelectedEdges) {
+          if (selectedDisciplina) {
+            if (isRelatedToSelection) {
+              edgeOpacity = 1.0;
+              edgeWidth = 3.0; // thicker to stand out
+              if (pre === selectedDisciplina.codigo) {
+                // Outgoing from selection (what it unlocks)
+                edgeColor = isDark ? '#60a5fa' : '#2563eb'; // prominent blue
+                animated = true;
+              } else {
+                // Incoming to selection (what it depends on)
+                edgeColor = isDark ? '#34d399' : '#059669'; // prominent emerald
+              }
+            } else {
+              edgeOpacity = 0.0; // hide completely when selecting another subject
+            }
+          } else {
+            // Faint default blueprint style so it remains clean
+            edgeOpacity = 0.15;
           }
-        });
+        }
+
+        // Only include in the list if it's visible
+        if (edgeOpacity > 0) {
+          edgesList.push({
+            id: `edge-${pre}-${d.codigo}`,
+            source: pre,
+            target: d.codigo,
+            type: 'smoothstep',
+            animated,
+            style: { stroke: edgeColor, strokeWidth: edgeWidth, opacity: edgeOpacity, transition: 'opacity 0.3s, stroke 0.3s' },
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              width: 12,
+              height: 12,
+              color: edgeColor
+            }
+          });
+        }
       });
     });
 
     return edgesList;
-  }, [disciplinas, academicState, selectedArea, isDark]);
+  }, [disciplinas, academicState, selectedArea, isDark, selectedDisciplina, showOnlySelectedEdges]);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -386,6 +418,20 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
               </div>
             </div>
 
+            {/* Connection line focus toggle */}
+            <button
+              onClick={() => setShowOnlySelectedEdges(prev => !prev)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer backdrop-blur-md ${
+                showOnlySelectedEdges
+                  ? 'bg-blue-500/10 border-blue-500/30 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20'
+                  : 'bg-slate-500/10 border-slate-200/50 dark:border-slate-800/60 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-850'
+              }`}
+              title="Alternar entre mostrar todas as setas ou apenas as conexões da disciplina selecionada"
+            >
+              <GitFork className="w-3.5 h-3.5" />
+              <span>{showOnlySelectedEdges ? 'Apenas Conexões Selecionadas' : 'Mostrar Todas as Setas'}</span>
+            </button>
+
             {(selectedArea !== 'all' || selectedSemestreFilter !== 'all') && (
               <button
                 onClick={resetFilters}
@@ -440,7 +486,14 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
       </div>
 
       {/* Main Flow Canvas area */}
-      <div className="w-full flex-1 relative h-[500px] md:h-[calc(100vh-240px)] md:min-h-[650px] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-100/40 dark:bg-slate-950/40 shadow-inner">
+      <div 
+        className="w-full flex-1 relative h-[500px] md:h-[calc(100vh-240px)] md:min-h-[650px] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl overflow-hidden shadow-xs transition-all duration-300"
+        style={{
+          background: isDark
+            ? 'radial-gradient(circle at center, #0f172a 0%, #020617 100%)'
+            : 'radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%)'
+        }}
+      >
         {/* Info Banner (Collapsible) */}
         <div className="absolute top-4 left-4 z-10 pointer-events-auto">
           {!isLegendOpen ? (
@@ -503,7 +556,12 @@ export function Fluxograma({ disciplinas, academicState, onStatusChange }: Fluxo
             nodesDraggable={false}
             attributionPosition="bottom-right"
           >
-            <Background color="#94a3b8" gap={16} size={1} opacity={0.3} />
+            <Background 
+              variant="dots"
+              color={isDark ? '#334155' : '#cbd5e1'} 
+              gap={24} 
+              size={1.5} 
+            />
             <Controls className="!bg-white dark:!bg-slate-900 border !border-slate-200 dark:!border-slate-800 !rounded-xl !shadow-md" />
             <MiniMap 
               nodeColor={(node) => {

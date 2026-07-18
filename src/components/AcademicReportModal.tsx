@@ -19,6 +19,55 @@ import { curriculumService } from '../services/curriculumService';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
+const cleanCssColors = (cssText: string): string => {
+  // Replace OKLCH to standard HSL
+  let cleaned = cssText.replace(/oklch\(([^)]+)\)/g, (match, content) => {
+    try {
+      const parts = content.trim().replace(/,/g, ' ').replace(/\s+/g, ' ').split(' ');
+      const cleanParts = parts.filter((p: string) => p !== '/');
+      if (cleanParts.length >= 3) {
+        const lStr = cleanParts[0];
+        let lVal = parseFloat(lStr);
+        if (lStr.includes('%')) lVal = lVal / 100;
+        const lPercent = Math.round(lVal * 100);
+
+        const cVal = parseFloat(cleanParts[1]);
+        const sPercent = Math.min(100, Math.round(cVal * 400));
+
+        const hVal = Math.round(parseFloat(cleanParts[2]));
+
+        const alpha = cleanParts[3] ? cleanParts[3] : '';
+        if (alpha) {
+          return `hsla(${hVal}, ${sPercent}%, ${lPercent}%, ${alpha})`;
+        }
+        return `hsl(${hVal}, ${sPercent}%, ${lPercent}%)`;
+      }
+    } catch (e) {
+      console.warn('Error converting oklch:', e);
+    }
+    return 'rgb(71, 85, 105)'; // safe default slate-600
+  });
+
+  // Replace OKLAB to HSL grayscale
+  cleaned = cleaned.replace(/oklab\(([^)]+)\)/g, (match, content) => {
+    try {
+      const parts = content.trim().replace(/,/g, ' ').replace(/\s+/g, ' ').split(' ');
+      if (parts.length >= 1) {
+        const lStr = parts[0];
+        let lVal = parseFloat(lStr);
+        if (lStr.includes('%')) lVal = lVal / 100;
+        const lPercent = Math.round(lVal * 100);
+        return `hsl(0, 0%, ${lPercent}%)`;
+      }
+    } catch (e) {
+      console.warn('Error converting oklab:', e);
+    }
+    return 'rgb(100, 116, 139)';
+  });
+
+  return cleaned;
+};
+
 interface AcademicReportModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -45,38 +94,48 @@ export function AcademicReportModal({
     return `${year}.${month < 6 ? 1 : 2}`;
   });
 
+  const [showCargaHoraria, setShowCargaHoraria] = useState(true);
+  const [showCursando, setShowCursando] = useState(true);
+  const [showConcluidas, setShowConcluidas] = useState(true);
+
   const [isExportingPDF, setIsExportingPDF] = useState(false);
   const [isExportingPNG, setIsExportingPNG] = useState(false);
 
   // Group completed subjects by semester
   const concluidasBySemester = useMemo(() => {
     const grouped: { [key: number]: Disciplina[] } = {};
-    academicState.concluidas.forEach(codigo => {
+    (academicState.concluidas || []).forEach(codigo => {
       const disc = curriculumService.getByCodigo(codigo);
       if (disc) {
-        if (!grouped[disc.semestre]) {
-          grouped[disc.semestre] = [];
+        const sem = typeof disc.semestre === 'number' && disc.semestre !== null && !isNaN(disc.semestre) ? disc.semestre : 11;
+        if (!grouped[sem]) {
+          grouped[sem] = [];
         }
-        grouped[disc.semestre].push(disc);
+        grouped[sem].push(disc);
       }
     });
     
     // Sort keys and values
     return Object.keys(grouped)
       .map(Number)
+      .filter(sem => !isNaN(sem))
       .sort((a, b) => a - b)
       .map(semestre => ({
         semestre,
-        disciplinas: grouped[semestre].sort((a, b) => a.nome.localeCompare(b.nome))
+        disciplinas: (grouped[semestre] || []).sort((a, b) => a.nome.localeCompare(b.nome))
       }));
   }, [academicState.concluidas]);
 
   // Resolve cursando subjects
   const cursandoSubjects = useMemo(() => {
-    return academicState.cursando
+    return (academicState.cursando || [])
       .map(codigo => curriculumService.getByCodigo(codigo))
       .filter((d): d is Disciplina => d !== undefined)
-      .sort((a, b) => a.semestre - b.semestre || a.nome.localeCompare(b.nome));
+      .sort((a, b) => {
+        const semA = typeof a.semestre === 'number' && a.semestre !== null && !isNaN(a.semestre) ? a.semestre : 11;
+        const semB = typeof b.semestre === 'number' && b.semestre !== null && !isNaN(b.semestre) ? b.semestre : 11;
+        return semA - semB || a.nome.localeCompare(b.nome);
+      });
   }, [academicState.cursando]);
 
   const currentDateFormatted = useMemo(() => {
@@ -105,6 +164,54 @@ export function AcademicReportModal({
         backgroundColor: '#ffffff',
         logging: false,
         windowWidth: 800, // force standard printable width
+        onclone: (clonedDoc) => {
+          let combinedCSS = '';
+          try {
+            Array.from(clonedDoc.styleSheets).forEach(sheet => {
+              try {
+                const rules = sheet.cssRules || sheet.rules;
+                if (rules) {
+                  Array.from(rules).forEach(rule => {
+                    combinedCSS += rule.cssText + '\n';
+                  });
+                }
+              } catch (e) {
+                // Ignore cross-origin stylesheet errors
+              }
+            });
+          } catch (err) {}
+
+          Array.from(clonedDoc.getElementsByTagName('style')).forEach(style => {
+            try {
+              combinedCSS += style.innerHTML + '\n';
+            } catch (e) {}
+          });
+
+          // Clean all oklch and oklab colors
+          const cleanedCSS = cleanCssColors(combinedCSS);
+
+          // Clear original stylesheets and styles in the cloned document
+          Array.from(clonedDoc.getElementsByTagName('style')).forEach(el => el.remove());
+          Array.from(clonedDoc.getElementsByTagName('link')).forEach(el => {
+            if (el.rel === 'stylesheet') el.remove();
+          });
+
+          // Inject clean compiled CSS
+          const newStyle = clonedDoc.createElement('style');
+          newStyle.innerHTML = cleanedCSS;
+          clonedDoc.head.appendChild(newStyle);
+
+          // Also clean up inline styles on DOM elements in cloned document
+          try {
+            const elementsWithStyle = clonedDoc.querySelectorAll('[style]');
+            elementsWithStyle.forEach(el => {
+              const styleAttr = el.getAttribute('style');
+              if (styleAttr && (styleAttr.includes('oklch') || styleAttr.includes('oklab'))) {
+                el.setAttribute('style', cleanCssColors(styleAttr));
+              }
+            });
+          } catch (err) {}
+        }
       });
 
       const imgData = canvas.toDataURL('image/png');
@@ -157,6 +264,54 @@ export function AcademicReportModal({
         backgroundColor: '#ffffff',
         logging: false,
         windowWidth: 800,
+        onclone: (clonedDoc) => {
+          let combinedCSS = '';
+          try {
+            Array.from(clonedDoc.styleSheets).forEach(sheet => {
+              try {
+                const rules = sheet.cssRules || sheet.rules;
+                if (rules) {
+                  Array.from(rules).forEach(rule => {
+                    combinedCSS += rule.cssText + '\n';
+                  });
+                }
+              } catch (e) {
+                // Ignore cross-origin stylesheet errors
+              }
+            });
+          } catch (err) {}
+
+          Array.from(clonedDoc.getElementsByTagName('style')).forEach(style => {
+            try {
+              combinedCSS += style.innerHTML + '\n';
+            } catch (e) {}
+          });
+
+          // Clean all oklch and oklab colors
+          const cleanedCSS = cleanCssColors(combinedCSS);
+
+          // Clear original stylesheets and styles in the cloned document
+          Array.from(clonedDoc.getElementsByTagName('style')).forEach(el => el.remove());
+          Array.from(clonedDoc.getElementsByTagName('link')).forEach(el => {
+            if (el.rel === 'stylesheet') el.remove();
+          });
+
+          // Inject clean compiled CSS
+          const newStyle = clonedDoc.createElement('style');
+          newStyle.innerHTML = cleanedCSS;
+          clonedDoc.head.appendChild(newStyle);
+
+          // Also clean up inline styles on DOM elements in cloned document
+          try {
+            const elementsWithStyle = clonedDoc.querySelectorAll('[style]');
+            elementsWithStyle.forEach(el => {
+              const styleAttr = el.getAttribute('style');
+              if (styleAttr && (styleAttr.includes('oklch') || styleAttr.includes('oklab'))) {
+                el.setAttribute('style', cleanCssColors(styleAttr));
+              }
+            });
+          } catch (err) {}
+        }
       });
 
       const link = document.createElement('a');
@@ -249,6 +404,42 @@ export function AcademicReportModal({
                     className="w-full text-xs border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all"
                   />
                 </div>
+              </div>
+            </div>
+
+            {/* Customize Report Sections */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                Seções do Relatório
+              </h4>
+              <div className="space-y-2.5 bg-white dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-850/60">
+                <label className="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={showCargaHoraria}
+                    onChange={(e) => setShowCargaHoraria(e.target.checked)}
+                    className="rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
+                  />
+                  <span className="font-medium">Resumo de Carga Horária</span>
+                </label>
+                <label className="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={showCursando}
+                    onChange={(e) => setShowCursando(e.target.checked)}
+                    className="rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
+                  />
+                  <span className="font-medium">Disciplinas em Curso</span>
+                </label>
+                <label className="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={showConcluidas}
+                    onChange={(e) => setShowConcluidas(e.target.checked)}
+                    className="rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
+                  />
+                  <span className="font-medium">Histórico de Concluídas</span>
+                </label>
               </div>
             </div>
 
@@ -375,91 +566,133 @@ export function AcademicReportModal({
                   </div>
                 </div>
 
+                {/* Resumo de Carga Horária (PPC) */}
+                {showCargaHoraria && (
+                  <div className="space-y-2 pt-2 animate-in fade-in duration-150">
+                    <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200 pb-1">
+                      <span className="w-2 h-2 rounded-full bg-blue-500" />
+                      Resumo de Carga Horária (Estrutura do Curso / PPC)
+                    </h3>
+                    <div className="border border-slate-200 rounded-lg overflow-hidden bg-white">
+                      <table className="w-full text-[10px] text-left border-collapse">
+                        <thead>
+                          <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold">
+                            <th className="px-3 py-1.5">Categoria</th>
+                            <th className="px-3 py-1.5 text-center">Exigido</th>
+                            <th className="px-3 py-1.5 text-center">Integralizado</th>
+                            <th className="px-3 py-1.5 text-center">Computável</th>
+                            <th className="px-3 py-1.5 text-right">Pendente</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {stats.cargaHorariaStats
+                            ?.filter(category => category.exigido > 0 || category.integralizado > 0)
+                            ?.map((category, idx) => (
+                              <tr key={idx} className={`border-b border-slate-100 last:border-0 hover:bg-slate-50/50 ${category.nome === 'Carga Horária Total' ? 'font-bold bg-blue-50/20' : ''}`}>
+                                <td className="px-3 py-1.5 text-slate-800 font-medium">{category.nome}</td>
+                                <td className="px-3 py-1.5 text-center text-slate-600 font-mono">{category.exigido}h</td>
+                                <td className={`px-3 py-1.5 text-center font-mono ${category.integralizado > 0 ? 'text-blue-600 font-bold' : 'text-slate-600'}`}>{category.integralizado}h</td>
+                                <td className="px-3 py-1.5 text-center text-slate-600 font-mono">{category.computavel}h</td>
+                                <td className={`px-3 py-1.5 text-right font-mono ${category.pendente > 0 ? 'text-red-500 font-bold' : 'text-emerald-600 font-bold'}`}>
+                                  {category.pendente > 0 ? `${category.pendente}h` : 'Concluído'}
+                                </td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+
                 {/* Main Content Layout */}
                 <div className="space-y-5 pt-2">
                   
                   {/* Cursando Section */}
-                  <div className="space-y-2">
-                    <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200 pb-1">
-                      <span className="w-2 h-2 rounded-full bg-amber-500" />
-                      Disciplinas Atualmente em Curso ({cursandoSubjects.length})
-                    </h3>
-                    
-                    {cursandoSubjects.length === 0 ? (
-                      <p className="text-[11px] text-slate-400 italic">Nenhuma disciplina em curso declarada.</p>
-                    ) : (
-                      <div className="border border-slate-200 rounded-lg overflow-hidden">
-                        <table className="w-full text-[10px] text-left border-collapse">
-                          <thead>
-                            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold">
-                              <th className="px-3 py-1.5">Código</th>
-                              <th className="px-3 py-1.5">Nome da Disciplina</th>
-                              <th className="px-3 py-1.5 text-center">Semestre</th>
-                              <th className="px-3 py-1.5 text-center">Créditos</th>
-                              <th className="px-3 py-1.5 text-right">Horas</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {cursandoSubjects.map(d => (
-                              <tr key={d.codigo} className="border-b border-slate-100 hover:bg-slate-50/50">
-                                <td className="px-3 py-1.5 font-mono text-[9px] font-bold text-slate-600">{d.codigo}</td>
-                                <td className="px-3 py-1.5 font-medium text-slate-800">{d.nome}</td>
-                                <td className="px-3 py-1.5 text-center text-slate-600">{d.semestre}º</td>
-                                <td className="px-3 py-1.5 text-center text-slate-600">{d.creditos}</td>
-                                <td className="px-3 py-1.5 text-right text-slate-600 font-mono">{d.cargaHoraria}h</td>
+                  {showCursando && (
+                    <div className="space-y-2 animate-in fade-in duration-150">
+                      <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200 pb-1">
+                        <span className="w-2 h-2 rounded-full bg-amber-500" />
+                        Disciplinas Atualmente em Curso ({cursandoSubjects.length})
+                      </h3>
+                      
+                      {cursandoSubjects.length === 0 ? (
+                        <p className="text-[11px] text-slate-400 italic">Nenhuma disciplina em curso declarada.</p>
+                      ) : (
+                        <div className="border border-slate-200 rounded-lg overflow-hidden">
+                          <table className="w-full text-[10px] text-left border-collapse">
+                            <thead>
+                              <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold">
+                                <th className="px-3 py-1.5">Código</th>
+                                <th className="px-3 py-1.5">Nome da Disciplina</th>
+                                <th className="px-3 py-1.5 text-center">Semestre</th>
+                                <th className="px-3 py-1.5 text-center">Créditos</th>
+                                <th className="px-3 py-1.5 text-right">Horas</th>
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                  </div>
+                            </thead>
+                            <tbody>
+                              {cursandoSubjects.map(d => (
+                                <tr key={d.codigo} className="border-b border-slate-100 hover:bg-slate-50/50">
+                                  <td className="px-3 py-1.5 font-mono text-[9px] font-bold text-slate-600">{d.codigo}</td>
+                                  <td className="px-3 py-1.5 font-medium text-slate-800">{d.nome}</td>
+                                  <td className="px-3 py-1.5 text-center text-slate-600">{d.semestre}º</td>
+                                  <td className="px-3 py-1.5 text-center text-slate-600">{d.creditos}</td>
+                                  <td className="px-3 py-1.5 text-right text-slate-600 font-mono">{d.cargaHoraria}h</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {/* Concluidas Section */}
-                  <div className="space-y-3">
-                    <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200 pb-1">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                      Histórico de Disciplinas Concluídas ({academicState.concluidas.length})
-                    </h3>
+                  {showConcluidas && (
+                    <div className="space-y-3 animate-in fade-in duration-150">
+                      <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-200 pb-1">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                        Histórico de Disciplinas Concluídas ({academicState.concluidas.length})
+                      </h3>
 
-                    {concluidasBySemester.length === 0 ? (
-                      <p className="text-[11px] text-slate-400 italic">Nenhuma disciplina concluída registrada.</p>
-                    ) : (
-                      <div className="space-y-3">
-                        {concluidasBySemester.map(group => {
-                          const semCarga = group.disciplinas.reduce((acc, current) => acc + current.cargaHoraria, 0);
-                          const semCred = group.disciplinas.reduce((acc, current) => acc + current.creditos, 0);
-                          
-                          return (
-                            <div key={group.semestre} className="border border-slate-200 rounded-lg overflow-hidden space-y-0 bg-white">
-                              {/* Group Header */}
-                              <div className="bg-slate-50 px-3 py-1.5 border-b border-slate-200 flex justify-between items-center text-[10px] font-bold text-slate-700">
-                                <span className="uppercase text-slate-800">{group.semestre}º Semestre</span>
-                                <div className="flex gap-3 text-slate-500 font-normal">
-                                  <span>Créditos: <b className="font-bold text-slate-700">{semCred}</b></span>
-                                  <span>Horas: <b className="font-bold text-slate-700">{semCarga}h</b></span>
+                      {concluidasBySemester.length === 0 ? (
+                        <p className="text-[11px] text-slate-400 italic">Nenhuma disciplina concluída registrada.</p>
+                      ) : (
+                        <div className="space-y-3">
+                          {concluidasBySemester.map(group => {
+                            const semCarga = group.disciplinas.reduce((acc, current) => acc + current.cargaHoraria, 0);
+                            const semCred = group.disciplinas.reduce((acc, current) => acc + current.creditos, 0);
+                            
+                            return (
+                              <div key={group.semestre} className="border border-slate-200 rounded-lg overflow-hidden space-y-0 bg-white">
+                                {/* Group Header */}
+                                <div className="bg-slate-50 px-3 py-1.5 border-b border-slate-200 flex justify-between items-center text-[10px] font-bold text-slate-700">
+                                  <span className="uppercase text-slate-800">{group.semestre}º Semestre</span>
+                                  <div className="flex gap-3 text-slate-500 font-normal">
+                                    <span>Créditos: <b className="font-bold text-slate-700">{semCred}</b></span>
+                                    <span>Horas: <b className="font-bold text-slate-700">{semCarga}h</b></span>
+                                  </div>
                                 </div>
+                                
+                                <table className="w-full text-[10px] text-left border-collapse">
+                                  <tbody>
+                                    {group.disciplinas.map(d => (
+                                      <tr key={d.codigo} className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50">
+                                        <td className="px-3 py-1.5 font-mono text-[9px] font-bold text-slate-500 w-24">{d.codigo}</td>
+                                        <td className="px-3 py-1.5 font-medium text-slate-700">{d.nome}</td>
+                                        <td className="px-3 py-1.5 text-center text-slate-500 w-20 font-mono text-[9px]">{d.area}</td>
+                                        <td className="px-3 py-1.5 text-center text-slate-600 w-16">{d.creditos} CR</td>
+                                        <td className="px-3 py-1.5 text-right text-slate-600 font-mono w-16">{d.cargaHoraria}h</td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
                               </div>
-                              
-                              <table className="w-full text-[10px] text-left border-collapse">
-                                <tbody>
-                                  {group.disciplinas.map(d => (
-                                    <tr key={d.codigo} className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50">
-                                      <td className="px-3 py-1.5 font-mono text-[9px] font-bold text-slate-500 w-24">{d.codigo}</td>
-                                      <td className="px-3 py-1.5 font-medium text-slate-700">{d.nome}</td>
-                                      <td className="px-3 py-1.5 text-center text-slate-500 w-20 font-mono text-[9px]">{d.area}</td>
-                                      <td className="px-3 py-1.5 text-center text-slate-600 w-16">{d.creditos} CR</td>
-                                      <td className="px-3 py-1.5 text-right text-slate-600 font-mono w-16">{d.cargaHoraria}h</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                 </div>
               </div>
