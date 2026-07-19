@@ -19,54 +19,212 @@ import { curriculumService } from '../services/curriculumService';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
-const cleanCssColors = (cssText: string): string => {
-  // Replace OKLCH to standard HSL
-  let cleaned = cssText.replace(/oklch\(([^)]+)\)/g, (match, content) => {
+const oklchToRgb = (l: number, c: number, h: number, alpha?: number): string => {
+  // Convert h from degrees to radians
+  const hRad = (h * Math.PI) / 180;
+  const a = c * Math.cos(hRad);
+  const b = c * Math.sin(hRad);
+  return oklabToRgb(l, a, b, alpha);
+};
+
+const oklabToRgb = (L: number, a: number, b: number, alpha?: number): string => {
+  // LMS linear
+  const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
+  const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
+  const s_ = L - 0.0894841775 * a - 1.2914855480 * b;
+
+  // LMS non-linear (cube)
+  const l = l_ * l_ * l_;
+  const m = m_ * m_ * m_;
+  const s = s_ * s_ * s_;
+
+  // XYZ to RGB
+  let r = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
+  let g = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
+  let bVal = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s;
+
+  // Gamma correction
+  const correct = (val: number) => {
+    return val <= 0.0031308 ? 12.92 * val : 1.055 * Math.pow(val, 1 / 2.4) - 0.055;
+  };
+
+  const R = Math.round(Math.max(0, Math.min(1, correct(r))) * 255);
+  const G = Math.round(Math.max(0, Math.min(1, correct(g))) * 255);
+  const B = Math.round(Math.max(0, Math.min(1, correct(bVal))) * 255);
+
+  if (alpha !== undefined) {
+    return `rgba(${R}, ${G}, ${B}, ${alpha})`;
+  }
+  return `rgb(${R}, ${G}, ${B})`;
+};
+
+const convertOklchAndOklabToRgb = (str: string): string => {
+  if (!str.includes('oklch') && !str.includes('oklab')) {
+    return str;
+  }
+
+  let result = str;
+
+  // Replace oklch(...)
+  result = result.replace(/oklch\(([^)]+)\)/g, (match, content) => {
     try {
       const parts = content.trim().replace(/,/g, ' ').replace(/\s+/g, ' ').split(' ');
       const cleanParts = parts.filter((p: string) => p !== '/');
       if (cleanParts.length >= 3) {
         const lStr = cleanParts[0];
-        let lVal = parseFloat(lStr);
-        if (lStr.includes('%')) lVal = lVal / 100;
-        const lPercent = Math.round(lVal * 100);
+        let L = parseFloat(lStr);
+        if (lStr.includes('%')) L = L / 100;
 
-        const cVal = parseFloat(cleanParts[1]);
-        const sPercent = Math.min(100, Math.round(cVal * 400));
+        const cStr = cleanParts[1];
+        let C = parseFloat(cStr);
+        if (cStr.includes('%')) C = C / 100;
 
-        const hVal = Math.round(parseFloat(cleanParts[2]));
+        const hStr = cleanParts[2];
+        let H = parseFloat(hStr);
+        if (hStr.includes('%')) H = (H / 100) * 360;
 
-        const alpha = cleanParts[3] ? cleanParts[3] : '';
-        if (alpha) {
-          return `hsla(${hVal}, ${sPercent}%, ${lPercent}%, ${alpha})`;
+        const aStr = cleanParts[3];
+        let alpha: number | undefined = undefined;
+        if (aStr) {
+          alpha = parseFloat(aStr);
+          if (aStr.includes('%')) alpha = alpha / 100;
         }
-        return `hsl(${hVal}, ${sPercent}%, ${lPercent}%)`;
+
+        return oklchToRgb(L, C, H, alpha);
       }
     } catch (e) {
-      console.warn('Error converting oklch:', e);
+      console.warn('Error converting oklch style:', e);
     }
-    return 'rgb(71, 85, 105)'; // safe default slate-600
+    return 'rgb(71, 85, 105)'; // default fallback slate-600
   });
 
-  // Replace OKLAB to HSL grayscale
-  cleaned = cleaned.replace(/oklab\(([^)]+)\)/g, (match, content) => {
+  // Replace oklab(...)
+  result = result.replace(/oklab\(([^)]+)\)/g, (match, content) => {
     try {
       const parts = content.trim().replace(/,/g, ' ').replace(/\s+/g, ' ').split(' ');
-      if (parts.length >= 1) {
-        const lStr = parts[0];
-        let lVal = parseFloat(lStr);
-        if (lStr.includes('%')) lVal = lVal / 100;
-        const lPercent = Math.round(lVal * 100);
-        return `hsl(0, 0%, ${lPercent}%)`;
+      const cleanParts = parts.filter((p: string) => p !== '/');
+      if (cleanParts.length >= 3) {
+        const lStr = cleanParts[0];
+        let L = parseFloat(lStr);
+        if (lStr.includes('%')) L = L / 100;
+
+        const aStr = cleanParts[1];
+        let A = parseFloat(aStr);
+        if (aStr.includes('%')) A = A / 100;
+
+        const bStr = cleanParts[2];
+        let B = parseFloat(bStr);
+        if (bStr.includes('%')) B = B / 100;
+
+        const alphaStr = cleanParts[3];
+        let alpha: number | undefined = undefined;
+        if (alphaStr) {
+          alpha = parseFloat(alphaStr);
+          if (alphaStr.includes('%')) alpha = alpha / 100;
+        }
+
+        return oklabToRgb(L, A, B, alpha);
       }
     } catch (e) {
-      console.warn('Error converting oklab:', e);
+      console.warn('Error converting oklab style:', e);
     }
-    return 'rgb(100, 116, 139)';
+    return 'rgb(100, 116, 139)'; // default fallback slate-500
   });
 
-  return cleaned;
+  return result;
 };
+
+const cleanCssColors = (cssText: string): string => {
+  return convertOklchAndOklabToRgb(cssText);
+};
+
+const executeWithSanitizedStyles = async <T,>(action: () => Promise<T>): Promise<T> => {
+  let combinedCss = '';
+  const originalNodes: { node: any; originalDisabled: boolean }[] = [];
+
+  // Extract CSS from all stylesheets
+  for (const sheet of Array.from(document.styleSheets)) {
+    const owner = sheet.ownerNode as any;
+    if (owner && (owner instanceof HTMLStyleElement || owner instanceof HTMLLinkElement)) {
+      originalNodes.push({
+        node: owner,
+        originalDisabled: owner.disabled,
+      });
+
+      try {
+        const rules = sheet.cssRules || (sheet as any).rules;
+        if (rules) {
+          for (const rule of Array.from(rules)) {
+            combinedCss += (rule as any).cssText + '\n';
+          }
+        }
+      } catch (e) {
+        // If it fails (e.g. cross-origin link), we can read innerHTML of style element if possible
+        if (owner instanceof HTMLStyleElement) {
+          combinedCss += owner.innerHTML + '\n';
+        }
+      }
+    }
+  }
+
+  // Sanitize the CSS (convert oklch and oklab to standard colors)
+  const sanitizedCss = cleanCssColors(combinedCss);
+
+  // Inject a temporary style tag with sanitized styles so there's no layout/style shift
+  const tempStyle = document.createElement('style');
+  tempStyle.id = 'temp-html2canvas-sanitized-styles';
+  tempStyle.innerHTML = sanitizedCss;
+  document.head.appendChild(tempStyle);
+
+  // Disable original styles so html2canvas doesn't parse them and crash
+  for (const item of originalNodes) {
+    item.node.disabled = true;
+  }
+
+  // Monkeypatch window.getComputedStyle to return standard RGB instead of oklch/oklab
+  const originalGetComputedStyle = window.getComputedStyle;
+  window.getComputedStyle = function (el, pseudoElt) {
+    const view = el.ownerDocument?.defaultView || window;
+    const style = originalGetComputedStyle.call(view, el, pseudoElt);
+    return new Proxy(style, {
+      get(target, prop) {
+        if (prop === 'getPropertyValue') {
+          return function(name: string) {
+            const val = target.getPropertyValue(name);
+            return typeof val === 'string' ? convertOklchAndOklabToRgb(val) : val;
+          };
+        }
+        const val = target[prop as any];
+        if (typeof val === 'string') {
+          return convertOklchAndOklabToRgb(val);
+        }
+        if (typeof val === 'function') {
+          return val.bind(target);
+        }
+        return val;
+      }
+    }) as any;
+  };
+
+  try {
+    // Run the action (e.g., html2canvas and file download)
+    return await action();
+  } finally {
+    // Re-enable all original stylesheets
+    for (const item of originalNodes) {
+      item.node.disabled = item.originalDisabled;
+    }
+
+    // Restore original window.getComputedStyle
+    window.getComputedStyle = originalGetComputedStyle;
+
+    // Remove the temporary styles
+    if (tempStyle.parentNode) {
+      tempStyle.parentNode.removeChild(tempStyle);
+    }
+  }
+};
+
 
 interface AcademicReportModalProps {
   isOpen: boolean;
@@ -158,61 +316,15 @@ export function AcademicReportModal({
       await new Promise(resolve => setTimeout(resolve, 250));
 
       const element = reportRef.current;
-      const canvas = await html2canvas(element, {
-        scale: 2, // high quality
-        useCORS: true,
-        backgroundColor: '#ffffff',
-        logging: false,
-        windowWidth: 800, // force standard printable width
-        onclone: (clonedDoc) => {
-          let combinedCSS = '';
-          try {
-            Array.from(clonedDoc.styleSheets).forEach(sheet => {
-              try {
-                const rules = sheet.cssRules || sheet.rules;
-                if (rules) {
-                  Array.from(rules).forEach(rule => {
-                    combinedCSS += rule.cssText + '\n';
-                  });
-                }
-              } catch (e) {
-                // Ignore cross-origin stylesheet errors
-              }
-            });
-          } catch (err) {}
-
-          Array.from(clonedDoc.getElementsByTagName('style')).forEach(style => {
-            try {
-              combinedCSS += style.innerHTML + '\n';
-            } catch (e) {}
-          });
-
-          // Clean all oklch and oklab colors
-          const cleanedCSS = cleanCssColors(combinedCSS);
-
-          // Clear original stylesheets and styles in the cloned document
-          Array.from(clonedDoc.getElementsByTagName('style')).forEach(el => el.remove());
-          Array.from(clonedDoc.getElementsByTagName('link')).forEach(el => {
-            if (el.rel === 'stylesheet') el.remove();
-          });
-
-          // Inject clean compiled CSS
-          const newStyle = clonedDoc.createElement('style');
-          newStyle.innerHTML = cleanedCSS;
-          clonedDoc.head.appendChild(newStyle);
-
-          // Also clean up inline styles on DOM elements in cloned document
-          try {
-            const elementsWithStyle = clonedDoc.querySelectorAll('[style]');
-            elementsWithStyle.forEach(el => {
-              const styleAttr = el.getAttribute('style');
-              if (styleAttr && (styleAttr.includes('oklch') || styleAttr.includes('oklab'))) {
-                el.setAttribute('style', cleanCssColors(styleAttr));
-              }
-            });
-          } catch (err) {}
-        }
-      });
+      const canvas = await executeWithSanitizedStyles(() => 
+        html2canvas(element, {
+          scale: 2, // high quality
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false,
+          windowWidth: 800, // force standard printable width
+        })
+      );
 
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
@@ -258,61 +370,15 @@ export function AcademicReportModal({
       await new Promise(resolve => setTimeout(resolve, 250));
 
       const element = reportRef.current;
-      const canvas = await html2canvas(element, {
-        scale: 2, // high quality
-        useCORS: true,
-        backgroundColor: '#ffffff',
-        logging: false,
-        windowWidth: 800,
-        onclone: (clonedDoc) => {
-          let combinedCSS = '';
-          try {
-            Array.from(clonedDoc.styleSheets).forEach(sheet => {
-              try {
-                const rules = sheet.cssRules || sheet.rules;
-                if (rules) {
-                  Array.from(rules).forEach(rule => {
-                    combinedCSS += rule.cssText + '\n';
-                  });
-                }
-              } catch (e) {
-                // Ignore cross-origin stylesheet errors
-              }
-            });
-          } catch (err) {}
-
-          Array.from(clonedDoc.getElementsByTagName('style')).forEach(style => {
-            try {
-              combinedCSS += style.innerHTML + '\n';
-            } catch (e) {}
-          });
-
-          // Clean all oklch and oklab colors
-          const cleanedCSS = cleanCssColors(combinedCSS);
-
-          // Clear original stylesheets and styles in the cloned document
-          Array.from(clonedDoc.getElementsByTagName('style')).forEach(el => el.remove());
-          Array.from(clonedDoc.getElementsByTagName('link')).forEach(el => {
-            if (el.rel === 'stylesheet') el.remove();
-          });
-
-          // Inject clean compiled CSS
-          const newStyle = clonedDoc.createElement('style');
-          newStyle.innerHTML = cleanedCSS;
-          clonedDoc.head.appendChild(newStyle);
-
-          // Also clean up inline styles on DOM elements in cloned document
-          try {
-            const elementsWithStyle = clonedDoc.querySelectorAll('[style]');
-            elementsWithStyle.forEach(el => {
-              const styleAttr = el.getAttribute('style');
-              if (styleAttr && (styleAttr.includes('oklch') || styleAttr.includes('oklab'))) {
-                el.setAttribute('style', cleanCssColors(styleAttr));
-              }
-            });
-          } catch (err) {}
-        }
-      });
+      const canvas = await executeWithSanitizedStyles(() => 
+        html2canvas(element, {
+          scale: 2, // high quality
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false,
+          windowWidth: 800,
+        })
+      );
 
       const link = document.createElement('a');
       const safeName = studentName.trim() ? studentName.trim().toLowerCase().replace(/\s+/g, '_') : 'aluno';
@@ -473,6 +539,14 @@ export function AcademicReportModal({
               <FileText className="w-4 h-4 shrink-0" />
               {isExportingPNG ? 'Gerando Imagem...' : 'Baixar como Imagem (PNG)'}
             </button>
+            <button
+              onClick={() => window.print()}
+              disabled={isExportingPDF || isExportingPNG}
+              className="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-2 hover:shadow-md cursor-pointer disabled:opacity-50 border border-slate-200 dark:border-slate-700"
+            >
+              <Printer className="w-4 h-4 shrink-0" />
+              Imprimir / Salvar PDF do Navegador
+            </button>
           </div>
         </div>
 
@@ -497,7 +571,6 @@ export function AcademicReportModal({
               id="academic-report-content"
               ref={reportRef}
               className="w-[790px] min-h-[1110px] bg-white text-slate-900 p-8 shadow-xl border border-slate-300 rounded-xs flex flex-col justify-between font-sans leading-normal text-left relative"
-              style={{ contentVisibility: 'auto' }}
             >
               {/* Document Header */}
               <div className="space-y-4">
