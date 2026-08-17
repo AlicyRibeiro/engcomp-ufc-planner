@@ -35,7 +35,12 @@ export function SubjectSearch({ disciplinas, academicState, onAdd }: SubjectSear
         const cleanQuery = cleanString(query);
         const cleanNome = cleanString(d.nome);
         const cleanCodigo = cleanString(d.codigo);
-        return cleanNome.includes(cleanQuery) || cleanCodigo.includes(cleanQuery);
+        const cleanEmenta = d.ementa ? cleanString(d.ementa) : '';
+        const cleanArea = cleanString(d.area);
+        return cleanNome.includes(cleanQuery) || 
+               cleanCodigo.includes(cleanQuery) || 
+               cleanEmenta.includes(cleanQuery) ||
+               cleanArea.includes(cleanQuery);
       }).slice(0, 8); // Limit search results to 8 for UI cleanliness
 
   const isAlreadyAdded = (codigo: string) => {

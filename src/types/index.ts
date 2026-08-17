@@ -2,11 +2,12 @@ export interface Disciplina {
   id: number;
   codigo: string;
   nome: string;
-  semestre: number;
+  semestre: number | null;
   creditos: number;
   cargaHoraria: number;
   prerequisitos: string[];
   area: string;
+  ementa?: string;
 }
 
 export type StatusDisciplina = 'concluida' | 'cursando' | 'disponivel' | 'bloqueada';

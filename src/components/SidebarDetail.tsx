@@ -1,4 +1,5 @@
-import { X, CheckCircle, Clock, Play, Lock, HelpCircle, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { X, CheckCircle, Clock, Play, Lock, HelpCircle, ArrowRight, BookOpen, Copy, Check } from 'lucide-react';
 import { Disciplina, StatusDisciplina } from '../types';
 import { curriculumService } from '../services/curriculumService';
 
@@ -11,7 +12,16 @@ interface SidebarDetailProps {
 }
 
 export function SidebarDetail({ disciplina, status, onClose, onStatusChange, todas }: SidebarDetailProps) {
+  const [copied, setCopied] = useState(false);
+
   if (!disciplina) return null;
+
+  const handleCopyEmenta = () => {
+    if (!disciplina.ementa) return;
+    navigator.clipboard.writeText(`${disciplina.codigo} - ${disciplina.nome}\n\nEMENTA:\n${disciplina.ementa}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   // Find which subjects require THIS subject
   const unlocks = todas.filter(d => d.prerequisitos.includes(disciplina.codigo));
@@ -53,7 +63,7 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
   });
 
   return (
-    <div className="fixed inset-y-0 right-0 w-full sm:w-96 glass-panel border-l border-white/20 dark:border-slate-800/40 shadow-2xl z-50 flex flex-col transform transition-transform duration-300 backdrop-blur-2xl bg-white/75 dark:bg-slate-950/75">
+    <div className="fixed inset-y-0 right-0 w-full sm:w-[420px] glass-panel border-l border-white/20 dark:border-slate-800/40 shadow-2xl z-50 flex flex-col transform transition-transform duration-300 backdrop-blur-2xl bg-white/85 dark:bg-slate-950/85">
       {/* Header */}
       <div className="p-5 border-b border-slate-200/10 dark:border-slate-800/60 flex items-center justify-between bg-white/30 dark:bg-slate-900/30">
         <div className="flex flex-col">
@@ -62,7 +72,7 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
         </div>
         <button
           onClick={onClose}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -74,7 +84,7 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
           <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
             {disciplina.nome}
           </h3>
-          <span className="inline-block mt-2 text-xs bg-white/30 dark:bg-slate-800/40 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium border border-slate-200/10 dark:border-slate-800/10">
+          <span className="inline-block mt-2 text-xs bg-white/40 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium border border-slate-200/20 dark:border-slate-700/40">
             Área: {disciplina.area}
           </span>
         </div>
@@ -87,6 +97,38 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
             <span className="font-bold text-sm">{currentStatus.label}</span>
           </div>
         </div>
+
+        {/* Ementa Section */}
+        {disciplina.ementa && (
+          <div className="bg-slate-50/80 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200/60 dark:border-slate-800/60 shadow-2xs">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                <BookOpen className="w-4 h-4 text-blue-500" />
+                <span>Ementa Oficial (UFC)</span>
+              </div>
+              <button
+                onClick={handleCopyEmenta}
+                className="flex items-center gap-1 text-[11px] text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 font-medium px-2 py-0.5 rounded-md hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
+                title="Copiar ementa para área de transferência"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3 h-3 text-emerald-500" />
+                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Copiada!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3 h-3" />
+                    <span>Copiar</span>
+                  </>
+                )}
+              </button>
+            </div>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
+              {disciplina.ementa}
+            </p>
+          </div>
+        )}
 
         {/* Technical Data */}
         <div className="grid grid-cols-2 gap-4 bg-white/20 dark:bg-slate-900/20 p-4 rounded-xl border border-white/10 dark:border-slate-800/20 backdrop-blur-xs">
@@ -167,7 +209,7 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
           {status !== 'concluida' ? (
             <button
               onClick={() => onStatusChange(disciplina.codigo, 'concluida')}
-              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-xl shadow-xs transition-colors"
+              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 rounded-xl shadow-xs transition-colors cursor-pointer"
             >
               <CheckCircle className="w-3.5 h-3.5" />
               Marcar Concluída
@@ -175,7 +217,7 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
           ) : (
             <button
               onClick={() => onStatusChange(disciplina.codigo, 'none')}
-              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-slate-700 hover:text-white bg-slate-200 hover:bg-red-500 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-red-600 rounded-xl transition-colors"
+              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-slate-700 hover:text-white bg-slate-200 hover:bg-red-500 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-red-600 rounded-xl transition-colors cursor-pointer"
             >
               Desmarcar Concluída
             </button>
@@ -184,7 +226,7 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
           {status !== 'cursando' ? (
             <button
               onClick={() => onStatusChange(disciplina.codigo, 'cursando')}
-              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-slate-700 hover:text-white bg-slate-100 hover:bg-amber-500 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-amber-600 rounded-xl transition-colors border border-slate-200 dark:border-slate-700"
+              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-slate-700 hover:text-white bg-slate-100 hover:bg-amber-500 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-amber-600 rounded-xl transition-colors border border-slate-200 dark:border-slate-700 cursor-pointer"
             >
               <Clock className="w-3.5 h-3.5" />
               Marcar Cursando
@@ -192,7 +234,7 @@ export function SidebarDetail({ disciplina, status, onClose, onStatusChange, tod
           ) : (
             <button
               onClick={() => onStatusChange(disciplina.codigo, 'none')}
-              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-slate-700 hover:text-white bg-slate-200 hover:bg-red-500 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-red-600 rounded-xl transition-colors"
+              className="flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-slate-700 hover:text-white bg-slate-200 hover:bg-red-500 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-red-600 rounded-xl transition-colors cursor-pointer"
             >
               Desmarcar Cursando
             </button>

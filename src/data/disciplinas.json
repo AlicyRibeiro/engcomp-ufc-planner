@@ -7,7 +7,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "História da computação e da engenharia. O papel da Engenharia de Computação na sociedade e no mercado de trabalho. Áreas de atuação, atribuições profissionais e ética na engenharia (CREA/CONFEA). Estrutura curricular do curso e perfil do egresso. Noções básicas de hardware, software, sistemas embarcados e telecomunicações. Metodologia de projetos de engenharia e introdução à extensão universitária."
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "creditos": 6,
     "cargaHoraria": 96,
     "prerequisitos": [],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Conceito de algoritmo. Lógica de programação. Ambientes de desenvolvimento. Tipos de dados primitivos, variáveis, constantes e operadores. Estruturas de controle de fluxo: sequencial, condicional e repetição. Vetores e matrizes (arrays multidimensionais). Modularização e funções: parâmetros por valor e por referência. Manipulação de strings e ponteiros básicos. Tipos estruturados (registros/structs). Introdução à manipulação de arquivos."
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
     "creditos": 2,
     "cargaHoraria": 32,
     "prerequisitos": [],
-    "area": "Humanas e Gestão"
+    "area": "Humanas e Gestão",
+    "ementa": "Fundamentos da ética e moral. O papel social do engenheiro. Ética profissional e código de ética do sistema CONFEA/CREA. Legislação aplicada à tecnologia da informação e telecomunicações: direitos autorais, propriedade intelectual, patentes e marcas. Legislação de software e contratos de tecnologia. Crimes cibernéticos, privacidade e Lei Geral de Proteção de Dados (LGPD). Acessibilidade e direitos humanos."
   },
   {
     "id": 4,
@@ -37,7 +40,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Conjuntos numéricos e suas propriedades. Operações fundamentais, frações, potenciação e radiciação. Fatoração e produtos notáveis. Equações e inequações de 1º e 2º graus. Geometria plana e espacial elementar. Relações, funções e gráficos: funções afim, quadrática, modular, exponencial e logarítmica. Trigonometria no triângulo retângulo e no ciclo trigonométrico."
   },
   {
     "id": 5,
@@ -47,7 +51,8 @@
     "creditos": 2,
     "cargaHoraria": 32,
     "prerequisitos": [],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Revisão e aprofundamento do conceito de função: domínio, imagem, contradomínio e gráficos. Composição de funções e função inversa. Funções polinomiais, racionais, exponenciais, logarítmicas e trigonométricas. Identidades trigonométricas e equações trigonométricas. Resolução de inequações racionais e modulares. Introdução intuitiva ao conceito de limite e continuidade."
   },
   {
     "id": 6,
@@ -57,7 +62,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Sistemas de equações lineares e eliminação de Gauss-Jordan. Matrizes e determinantes: operações, inversão e propriedades. Espaços vetoriais reais e subespaços. Combinação linear, dependência e independência linear. Base, dimensão e coordenadas. Transformações lineares: núcleo, imagem e matriz associada. Autovalores e autovetores. Diagonalização de matrizes. Produto interno e ortogonalização de Gram-Schmidt. Aplicações na engenharia e computação."
   },
   {
     "id": 7,
@@ -67,7 +73,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Evolução histórica das arquiteturas de computadores e modelo de von Neumann. Estrutura e funcionamento básico da CPU: barramentos, registradores, ULA e unidade de controle. Ciclo de busca, decodificação e execução de instruções. Conjunto de instruções (ISA - CISC vs RISC). Modos de endereçamento. Hierarquia de memória: registradores, cache, memória principal e secundária. Mecanismos de entrada e saída, interrupções e DMA."
   },
   {
     "id": 8,
@@ -79,7 +86,8 @@
     "prerequisitos": [
       "QXD0001"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Conceito de Tipo Abstrato de Dados (TAD). Alocação dinâmica de memória e manipulação de ponteiros. Estruturas de dados lineares: listas encadeadas (simples, duplas e circulares), pilhas e filas (estáticas e dinâmicas). Algoritmos de busca e ordenação elementares e eficientes (Bubble, Insertion, Selection, MergeSort, QuickSort). Estruturas de dados não lineares: árvores binárias, árvores de busca binária (BST), árvores balanceadas (AVL) e heaps. Noções de complexidade de algoritmos (notação Big-O)."
   },
   {
     "id": 9,
@@ -91,7 +99,8 @@
     "prerequisitos": [
       "QXD0109"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Conceito de limite e propriedades fundamentais. Limites laterais, no infinito e infinitos. Continuidade de funções. Conceito de derivada, interpretação geométrica e física (taxa de variação). Regras de derivação: soma, produto, quociente e regra da cadeia. Derivação implícita e taxas relacionadas. Aplicações de derivadas: máximos e mínimos, concavidade, esboço de gráficos e otimização. Teorema do Valor Médio e regra de L'Hôpital. Introdução à integral indefinida e definida. Teorema Fundamental do Cálculo. Técnicas básicas de integração: substituição."
   },
   {
     "id": 10,
@@ -103,7 +112,8 @@
     "prerequisitos": [
       "QXD0056"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Lógica proposicional e de predicados: tabelas-verdade, equivalências lógicas e quantificadores. Técnicas de demonstração matemática: direta, por contradição, contrapositiva e indução matemática. Teoria dos conjuntos, relações de equivalência e de ordem parcial. Funções injetoras, sobrejetoras e bijetoras. Análise combinatória básica: princípio fundamental da contagem, permutações, combinações e princípio da casa dos pombos. Relações de recorrência lineares homogêneas e não homogêneas."
   },
   {
     "id": 11,
@@ -115,7 +125,8 @@
     "prerequisitos": [
       "QXD0005"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Conjunto de instruções e arquitetura no nível de linguagem de máquina (ex: MIPS/RISC-V/x86). Registradores, modos de endereçamento e formato de instruções. Programação em Assembly: operações aritméticas e lógicas, desvios condicionais e incondicionais, laços de repetição. Chamadas de procedimentos, passagem de parâmetros e pilha (stack frame). Manipulação de vetores, ponteiros e estruturas em baixo nível. Mapeamento de construções de linguagens de alto nível para assembly."
   },
   {
     "id": 12,
@@ -127,7 +138,8 @@
     "prerequisitos": [
       "QXD0010"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Introdução ao desenvolvimento de software para sistemas embarcados. Linguagem C avançada aplicada a sistemas embarcados: tipos de dados com tamanho fixo (stdint.h), manipulação de bits (bitwise), ponteiros e ponteiros para funções, qualificadores const e volatile. Estruturação de código modular e bibliotecas. Interfaceamento com registradores de hardware de microcontroladores (GPIO, temporizadores e PWM). Criação de drivers básicos de periféricos e máquinas de estados finitos (FSM)."
   },
   {
     "id": 13,
@@ -139,7 +151,8 @@
     "prerequisitos": [
       "QXD0005"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Conceito, estrutura e evolução dos sistemas operacionais. Processos e threads: estados de processos, criação, troca de contexto e escalonamento de CPU. Concorrência e sincronização: exclusão mútua, semáforos, mutexes, monitores e problemas clássicos (Produtor/Consumidor, Filósofos). Impasses (deadlocks): caracterização, prevenção, detecção e recuperação. Gerenciamento de memória: paginação, segmentação e memória virtual. Gerenciamento de arquivos e sistemas de E/S."
   },
   {
     "id": 14,
@@ -151,7 +164,8 @@
     "prerequisitos": [
       "QXD0006"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Técnicas avançadas de integração: integração por partes, frações parciais e substituições trigonométricas. Integrais impróprias. Aplicações da integral definida: áreas entre curvas, volumes de sólidos de revolução, comprimento de arco e trabalho. Sequências e séries numéricas: critérios de convergência (teste da integral, teste da comparação, teste da razão e teste da raiz). Séries alternadas. Séries de potências, séries de Taylor e Maclaurin."
   },
   {
     "id": 15,
@@ -163,7 +177,8 @@
     "prerequisitos": [
       "QXD0056"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Estatística descritiva: organização de dados, medidas de posição (média, mediana, moda) e de dispersão (variância, desvio padrão). Espaço amostral, eventos e axiomas da probabilidade. Probabilidade condicional, independência de eventos e Teorema de Bayes. Variáveis aleatórias discretas e contínuas: funções de probabilidade, densidade e distribuição acumulada. Distribuições teóricas discretas (Bernoulli, Binomial, Poisson) e contínuas (Uniforme, Exponencial, Normal). Amostragem, intervalos de confiança e testes de hipóteses."
   },
   {
     "id": 16,
@@ -173,7 +188,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Sistemas de numeração e códigos binários. Álgebra de Boole, postulados e teoremas. Portas lógicas fundamentais e universais. Minimização de funções lógicas com mapas de Karnaugh. Circuitos combinacionais: somadores, subtratores, multiplexadores, demultiplexadores, decodificadores e codificadores. Circuitos sequenciais: latches, flip-flops (SR, D, JK, T), registradores e contadores síncronos e assíncronos. Máquinas de estados finitos (Mealy e Moore). Introdução à linguagem de descrição de hardware (VHDL/Verilog)."
   },
   {
     "id": 17,
@@ -185,7 +201,8 @@
     "prerequisitos": [
       "QXD0280"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Projeto de processador (Datapath e Unidade de Controle monociclo e multiciclo). Técnicas de Pipelining: estágios de execução, hazards estruturais, de dados e de controle (forwarding, stalls e branch prediction). Hierarquia e organização de memória avançada: memória cache (mapeamento direto, associativo por conjunto e totalmente associativo), políticas de substituição e escrita. Memória virtual e TLB. Entrada e saída programada, por interrupção e DMA. Noções de processamento paralelo e superescalar."
   },
   {
     "id": 18,
@@ -197,7 +214,8 @@
     "prerequisitos": [
       "QXD0149"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Arquiteturas de software para sistemas embarcados de médio/alto porte. Comunicação serial síncrona e assíncrona (UART, SPI, I2C, CAN). Interrupções de hardware e tratamento em tempo de execução (ISR). Concorrência em sistemas embarcados sem SO (bare-metal com superloops vs interrupções). Introdução aos sistemas operacionais de tempo real (RTOS): tarefas, escalonamento preemptivo e cooperativo, filas de mensagens, mutexes e semáforos no FreeRTOS. Técnicas de depuração de hardware/software (JTAG/SWD, osciloscópio e analisador lógico)."
   },
   {
     "id": 19,
@@ -210,7 +228,8 @@
       "QXD0013",
       "QXD0010"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Implementação prática de subsistemas operacionais em nível de código-fonte de baixo nível. Desenvolvimento e customização de bootloader. Modos de operação do processador (Real Mode vs Protected/Long Mode). Chaveamento de tarefas e escalonadores customizados. Gerenciamento de memória física e virtual (paginação x86/ARM). Desenvolvimento de drivers de dispositivos e chamadas de sistema (syscalls). Criação de um micronúcleo ou kernel monolítico modular com suporte a concorrência."
   },
   {
     "id": 20,
@@ -223,7 +242,8 @@
       "QXD0116",
       "QXD0006"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Equações diferenciais ordinárias (EDOs) de 1ª ordem: métodos de separação de variáveis, equações lineares, exatas e fatores integrantes. Aplicações de EDOs de 1ª ordem na física e circuitos elétricos (circuitos RC e RL). EDOs lineares de 2ª ordem homogêneas e não homogêneas com coeficientes constantes (método dos coeficientes a determinar e variação dos parâmetros). Aplicações a circuitos RLC e oscilações mecânicas. Transformada de Laplace: definição, propriedades, transformada inversa e resolução de problemas de valor inicial (PVI). Sistemas de equações diferenciais lineares."
   },
   {
     "id": 21,
@@ -235,7 +255,8 @@
     "prerequisitos": [
       "QXD0134"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Funções de várias variáveis reais: domínio, curvas de nível, limites e continuidade. Derivadas parciais, derivadas de ordem superior e plano tangente. Diferenciabilidade e diferencial total. Regra da cadeia para funções multivariáveis. Derivada direcional e vetor gradiente. Máximos e mínimos de funções de duas variáveis e multiplicadores de Lagrange. Integrais duplas e triplas: cálculo iterado, mudança de variáveis (coordenadas polares, cilíndricas e esféricas) e aplicações a centros de massa e momentos de inércia."
   },
   {
     "id": 22,
@@ -247,7 +268,8 @@
     "prerequisitos": [
       "QXD0117"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Linguagens de descrição de hardware (VHDL/Verilog) em nível estrutural, comportamental e RTL. Dispositivos lógicos programáveis (CPLD e FPGA): arquitetura interna, fluxo de síntese, mapeamento e programação. Projeto e implementação de circuitos combinacionais e sequenciais complexos em FPGA. Projeto de unidades de controle microprogramadas e hardwired. Projeto de datapath de processadores dedicados e sistemas digitais integrados. Simulação funcional e temporal (testbenches)."
   },
   {
     "id": 23,
@@ -260,7 +282,8 @@
       "QXD0117",
       "QXD0140"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Conceitos fundamentais de circuitos elétricos: carga, corrente, tensão, potência e energia. Leis de Kirchhoff (LKC e LKV). Elementos de circuito: resistores, fontes independentes e dependentes, capacitores e indutores. Métodos sistemáticos de análise: análise nodal e análise de malhas. Teoremas de circuitos: Thévenin, Norton, superposição e máxima transferência de potência. Análise de circuitos de 1ª ordem (RC e RL) e 2ª ordem (RLC) no domínio do tempo (resposta natural e ao degrau). Análise em regime permanente senoidal: fasores, impedância, potência ativa, reativa e aparente."
   },
   {
     "id": 24,
@@ -272,7 +295,8 @@
     "prerequisitos": [
       "QXD0135"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Carga elétrica e Lei de Coulomb. Campo elétrico e Lei de Gauss. Potencial elétrico e energia potencial eletrostática. Condutores, dielétricos e capacitância. Corrente elétrica, resistência e Lei de Ohm. Campo magnético, força de Lorentz e Lei de Biot-Savart. Lei de Ampère. Indução eletromagnética e Lei de Faraday-Lenz. Indutância e energia magnética. Equações de Maxwell na forma integral e diferencial. Noções sobre ondas eletromagnéticas."
   },
   {
     "id": 25,
@@ -284,7 +308,8 @@
     "prerequisitos": [
       "QXD0010"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Conceitos fundamentais de Engenharia de Software. Ciclos de vida e processos de desenvolvimento de software: modelos tradicionais (cascata, iterativo) e métodos ágeis (Scrum, Kanban, XP). Engenharia de requisitos: elicitação, análise, especificação e validação. Modelagem orientada a objetos com UML (diagramas de classes, casos de uso, sequência, atividades). Padrões de projeto (Design Patterns). Princípios SOLID. Garantia de qualidade, testes de software (unitários, integração e funcionais) e integração contínua (CI/CD)."
   },
   {
     "id": 26,
@@ -296,7 +321,8 @@
     "prerequisitos": [
       "QXD0010"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Concepção, especificação, planejamento e prototipagem inicial de um projeto multidisciplinar integrando hardware e software. Definição do problema, levantamento de requisitos, arquitetura do sistema e plano de testes. Aplicação prática de conceitos de circuitos digitais, sistemas embarcados, programação e engenharia de software. Trabalho em equipe, metodologias ágeis de gestão de projetos e comunicação técnica (relatórios e apresentações)."
   },
   {
     "id": 27,
@@ -308,7 +334,8 @@
     "prerequisitos": [
       "QXD0288"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Arquitetura interna de microcontroladores modernos (ex: famílias ARM Cortex-M, PIC ou AVR). Memória de programa, memória de dados, pilha e registradores especiais. Barramentos internos, periféricos integrados e mapeamento de memória. Configuração de relógio (clocks/PLL), reset e modos de baixo consumo (power management). Temporizadores avançados, PWM, conversor analógico-digital (ADC) e digital-analógico (DAC). Práticas de laboratório com shields e kits de desenvolvimento."
   },
   {
     "id": 28,
@@ -318,7 +345,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Redes e Telecom"
+    "area": "Redes e Telecom",
+    "ementa": "Arquitetura e modelos de referência de redes de computadores (OSI e TCP/IP). Camada de Aplicação: protocolos HTTP, DNS, DHCP, FTP, SMTP e arquiteturas cliente-servidor e P2P. Camada de Transporte: protocolos TCP e UDP, controle de fluxo, controle de congestionamento e mecanismos de multiplexação. Camada de Rede: protocolo IPv4/IPv6, roteamento estático e dinâmico (RIP, OSPF, BGP), endereçamento, sub-redes e NAT. Camada de Enlace: controle de acesso ao meio (CSMA/CD, Ethernet, Wi-Fi), comutação (switching) e VLANs. Camada Física e meios de transmissão."
   },
   {
     "id": 29,
@@ -331,7 +359,8 @@
       "QXD0008",
       "QXD0140"
     ],
-    "area": "Sinais e Controle"
+    "area": "Sinais e Controle",
+    "ementa": "Classificação de sinais e sistemas no tempo contínuo e discreto: linearidade, invariância no tempo, causalidade e estabilidade (LTI). Representação de sistemas LTI por equações diferenciais e de diferenças. Convolução contínua e discreta. Análise de Fourier para sinais contínuos: Série de Fourier e Transformada de Fourier. Resposta em frequência de sistemas LTI contínuos. Amostragem de sinais contínuos e Teorema de Nyquist-Shannon. Transformada Z: definição, região de convergência, propriedades e transformada inversa. Análise de sistemas discretos no domínio Z."
   },
   {
     "id": 30,
@@ -343,7 +372,8 @@
     "prerequisitos": [
       "QXD0131"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Física dos semicondutores: semicondutores tipo P e tipo N, junção PN. Diodos semicondutores: características I-V, modelos e circuitos de aplicação (retificadores de meia onda e onda completa, filtros capacitivos, ceifadores, grampeadores e diodo Zener como regulador de tensão). Transistores Bipolares de Junção (TBJ): estrutura física, modos de operação, polarização CC e reta de carga. Modelos para pequenos sinais e análise de amplificadores TBJ elementares (emissor comum, coletor comum e base comum). Introdução aos transistores de efeito de campo (MOSFETs)."
   },
   {
     "id": 31,
@@ -355,7 +385,8 @@
     "prerequisitos": [
       "QXD0008"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Lógica proposicional formal: sintaxe, semântica, tabelas de verdade, validade e satisfatibilidade. Sistemas dedutivos: dedução natural, cálculo de sequentes e resolução proposicional. Lógica de predicados de primeira ordem: sintaxe, semântica, modelos, quantificadores e formalização de problemas. Sistemas formais de prova para lógica de primeira ordem: dedução natural e resolução com unificação. Completude e correção de sistemas lógicos. Aplicações em verificação de programas e raciocínio automatizado."
   },
   {
     "id": 32,
@@ -365,9 +396,11 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0283"
+      "QXD0283",
+      "QXD0150"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Processos e ciclos de vida de software voltados para sistemas embarcados e críticos (normas de segurança funcional como IEC 61508, ISO 26262 e MISRA C). Arquiteturas de software embarcado (HAL, camadas de abstração de SO, drivers e middleware). Gerenciamento de recursos escassos: memória, consumo de energia e ciclos de clock. Técnicas de modelagem orientada a modelos (MBD) e geração de código. Verificação, validação e testes automatizados de software embarcado (HIL/SIL, static analysis, unit testing)."
   },
   {
     "id": 33,
@@ -379,7 +412,8 @@
     "prerequisitos": [
       "QXD0284"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Desenvolvimento completo, implementação e testes finais do protótipo concebido no Projeto Integrado I. Integração entre hardware customizado, firmware e software de alto nível/nuvem. Validação experimental de requisitos, testes de desempenho e confiabilidade. Documentação técnica final, elaboração de manual de usuário e apresentação pública com demonstração prática funcional."
   },
   {
     "id": 34,
@@ -391,7 +425,8 @@
     "prerequisitos": [
       "QXD0137"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Transistores de Efeito de Campo (MOSFET e JFET): estrutura física, características I-V, polarização CC e circuitos amplificadores (fonte comum, dreno comum e porta comum). Amplificadores operacionais (AmpOps): características ideais e reais, configurações básicas (inversor, não-inversor, somador, integrador, diferenciador e comparadores). Circuitos com realimentação negativa e positiva (Schmitt Trigger e osciladores). Filtros ativos analógicos (Butterworth, Chebyshev). Amplificadores de potência e fontes reguladas lineares e chaveadas."
   },
   {
     "id": 35,
@@ -403,7 +438,8 @@
     "prerequisitos": [
       "QXD0021"
     ],
-    "area": "Redes e Telecom"
+    "area": "Redes e Telecom",
+    "ementa": "Conceitos, caracterização e desafios de sistemas distribuídos: heterogeneidade, escalabilidade e tolerância a falhas. Modelos de comunicação: sockets, RPC (Remote Procedure Call), RMI e middleware orientado a mensagens (gRPC, MQTT). Sincronização em sistemas distribuídos: relógios físicos e lógicos de Lamport, exclusão mútua distribuída e algoritmos de eleição. Consenso distribuído e tolerância a falhas (Paxos, Raft). Transações distribuídas e replicação de dados (teorema CAP). Arquiteturas modernas: microserviços e computação em nuvem."
   },
   {
     "id": 36,
@@ -415,7 +451,8 @@
     "prerequisitos": [
       "QXD0144"
     ],
-    "area": "Sinais e Controle"
+    "area": "Sinais e Controle",
+    "ementa": "Modelagem matemática de sistemas dinâmicos físicos (mecânicos, elétricos e térmicos). Função de transferência e diagramas de blocos. Resposta transitória e em regime permanente de sistemas de 1ª e 2ª ordem. Análise de estabilidade: critério de Routh-Hurwitz. Análise pelo Lugar das Raízes (Root Locus). Análise de resposta em frequência: diagramas de Bode e critério de Nyquist. Projeto de controladores clássicos: Proporcional-Integral-Derivativo (PID), avanço e atraso de fase. Introdução a Controladores Lógicos Programáveis (CLPs) e automação industrial."
   },
   {
     "id": 37,
@@ -427,7 +464,8 @@
     "prerequisitos": [
       "QXD0150"
     ],
-    "area": "Sinais e Controle"
+    "area": "Sinais e Controle",
+    "ementa": "Definição, características e requisitos de sistemas de tempo real (hard, soft e firm real-time). Modelos de tarefas: periódicas, aperiódicas e esporádicas. Algoritmos clássicos de escalonamento em tempo real: Rate Monotonic (RM), Earliest Deadline First (EDF) e Deadline Monotonic (DM). Análise de escalonabilidade e testes de utilização de CPU. Problemas de compartilhamento de recursos e inversão de prioridade (Protocolo de Herança de Prioridade - PIP e Protocolo de Teto de Prioridade - PCP). Programação com sistemas operacionais de tempo real."
   },
   {
     "id": 38,
@@ -439,7 +477,8 @@
     "prerequisitos": [
       "QXD0008"
     ],
-    "area": "Matemática e Física"
+    "area": "Matemática e Física",
+    "ementa": "Conceitos fundamentais de teoria da computação: alfabetos, cadeias e linguagens formais. Hierarquia de Chomsky. Linguagens regulares: Autômatos Finitos Determinísticos (AFD) e Não-Determinísticos (AFN), equivalência, minimização de estados, expressões regulares e Lema do Bombeamento para linguagens regulares. Linguagens livres de contexto: gramáticas livres de contexto (GLC), formas normais (Chomsky e Greibach) e autômatos com pilha (AP). Introdução às Máquinas de Turing e decidibilidade."
   },
   {
     "id": 39,
@@ -451,7 +490,8 @@
     "prerequisitos": [
       "QXD0138"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Princípios fundamentais de medição e instrumentação eletrônica: erros, incertezas, precisão e calibração de instrumentos. Sensores e transdutores: temperatura (termopares, RTD, termistores), pressão, luminosidade (LDR, fotodiodos), deformação (strain gauges), deslocamento e aceleração (IMUs). Circuitos de condicionamento de sinal: pontes de Wheatstone, amplificadores de instrumentação e isoladores. Conversores A/D e D/A em sistemas de instrumentação. Barramentos e protocolos de instrumentação (GPIB, RS-485, Modbus)."
   },
   {
     "id": 40,
@@ -461,9 +501,11 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0145"
+      "QXD0145",
+      "QXD0143"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Metodologias de codesign hardware-software para desenvolvimento de sistemas embarcados complexos. Escolha de arquitetura (SoC, FPGA + processador soft/hard core, microcontroladores heterogêneos). Projeto de placas de circuito impresso (PCB) e esquemáticos eletrônicos (EDA/CAD). Gerenciamento térmico, compatibilidade eletromagnética (EMC/EMI) e integridade de sinal. Desenvolvimento de firmware avançado, testes de integração de sistema e prototipagem física de um produto embarcado completo."
   },
   {
     "id": 41,
@@ -473,7 +515,8 @@
     "creditos": 2,
     "cargaHoraria": 32,
     "prerequisitos": [],
-    "area": "Humanas e Gestão"
+    "area": "Humanas e Gestão",
+    "ementa": "Elaboração e estruturação da proposta formal do Trabalho de Conclusão de Curso em Engenharia de Computação. Definição do tema, justificativa, objetivos gerais e específicos, e metodologia científica/tecnológica. Levantamento bibliográfico sistemático e revisão do estado da arte. Cronograma detalhado de execução e viabilidade técnica. Apresentação e defesa pública do projeto de qualificação perante banca examinadora."
   },
   {
     "id": 42,
@@ -486,7 +529,8 @@
       "QXD0145",
       "QXD0137"
     ],
-    "area": "Humanas e Gestão"
+    "area": "Humanas e Gestão",
+    "ementa": "Fundamentos da metodologia científica e tecnológica. Tipos de pesquisa e método científico. Formulação de hipóteses, problemas de pesquisa e objetivos. Normas técnicas da ABNT para redação de trabalhos acadêmicos (citações, referências e formatação). Ferramentas de busca acadêmica e gerenciadores de referências (Mendeley, Zotero, LaTeX). Estruturação de artigos científicos e relatórios técnicos. Ética na pesquisa, plágio e integridade acadêmica."
   },
   {
     "id": 43,
@@ -498,7 +542,8 @@
     "prerequisitos": [
       "QXD0219"
     ],
-    "area": "Humanas e Gestão"
+    "area": "Humanas e Gestão",
+    "ementa": "Execução do projeto de engenharia proposto e aprovado no TCC I. Desenvolvimento prático, implementação experimental, coleta e análise de dados. Validação dos resultados e discussão frente à literatura da área. Redação da monografia final de acordo com as normas acadêmicas da UFC. Apresentação oral e defesa pública perante banca examinadora para obtenção do grau de Engenheiro de Computação."
   },
   {
     "id": 44,
@@ -508,7 +553,8 @@
     "creditos": 3.75,
     "cargaHoraria": 60,
     "prerequisitos": [],
-    "area": "Humanas e Gestão"
+    "area": "Humanas e Gestão",
+    "ementa": "Integralização de atividades formativas e extracurriculares desenvolvidas ao longo do curso de graduação, incluindo: participação e apresentação em eventos científicos e tecnológicos, projetos de iniciação científica e tecnológica, monitoria acadêmica, projetos de extensão, cursos de capacitação e aperfeiçoamento, estágios não obrigatórios, publicações e vivências profissionais correlatas à Engenharia de Computação."
   },
   {
     "id": 45,
@@ -518,7 +564,8 @@
     "creditos": 8.25,
     "cargaHoraria": 132,
     "prerequisitos": [],
-    "area": "Humanas e Gestão"
+    "area": "Humanas e Gestão",
+    "ementa": "Planejamento, desenvolvimento e execução de ações de extensão universitária com impacto social direto na comunidade externa. Aplicação prática dos conhecimentos de Engenharia de Computação em prol da sociedade (cursos de inclusão digital, desenvolvimento de soluções tecnológicas para escolas e entidades sem fins lucrativos, oficinas e palestras). Registro e avaliação dos resultados e do impacto social gerado."
   },
   {
     "id": 46,
@@ -528,7 +575,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Desenvolvimento de estratégias de leitura e compreensão de textos técnicos em língua inglesa na área de computação e engenharia. Identificação de ideias principais e secundárias (skimming e scanning). Estudo de termos técnicos fundamentais, vocabulário especializado, falsos cognatos e afixos. Estruturas gramaticais essenciais: tempos verbais, voz passiva, modal verbs e conectivos."
   },
   {
     "id": 47,
@@ -540,7 +588,8 @@
     "prerequisitos": [
       "QXD0035"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Aprofundamento da leitura crítica e interpretação de documentação técnica complexa em inglês: manuais, datasheets, especificações de protocolos e artigos científicos da área de computação. Prática de escrita técnica em inglês: elaboração de resumos (abstracts), relatórios técnicos e emails formais. Noções de comunicação oral para apresentações técnicas."
   },
   {
     "id": 48,
@@ -551,9 +600,11 @@
     "cargaHoraria": 64,
     "prerequisitos": [
       "QXD0006",
-      "QXD0116"
+      "QXD0116",
+      "QXD0001"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Teoria de erros: representação numérica em ponto flutuante, erros absolutos e relativos, propagação de erros. Zeros de funções reais: métodos da bisseção, falsa posição, ponto fixo e Newton-Raphson. Resolução numérica de sistemas de equações lineares: métodos diretos (eliminação de Gauss, fatoração LU) e iterativos (Gauss-Jacobi e Gauss-Seidel). Interpolação polinomial: formas de Lagrange e Newton. Ajuste de curvas pelo método dos mínimos quadrados. Integração numérica: regras dos Trapézios e de Simpson. Resolução numérica de equações diferenciais ordinárias: método de Euler e métodos de Runge-Kutta."
   },
   {
     "id": 49,
@@ -565,7 +616,8 @@
     "prerequisitos": [
       "QXD0283"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceitos fundamentais de confiabilidade, disponibilidade, segurança e manutenibilidade em sistemas de computação. Taxonomia de falhas, erros e panes. Técnicas de redundância: espacial/hardware (TMR, duplex), temporal, de informação (códigos corretores de erro, ECC) e de software (N-Version Programming, Recovery Blocks). Detecção de erros e mecanismos de recuperação (checkpointing, rollback e rollforward). Confiabilidade em sistemas distribuídos e embarcados de missão crítica."
   },
   {
     "id": 50,
@@ -575,9 +627,11 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0007"
+      "QXD0007",
+      "QXD0010"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Paradigmas de programação: imperativo, orientado a objetos, funcional, lógico e concorrente. Conceitos fundamentais de linguagens: sintaxe e semântica formal, amarração (binding), sistemas de tipos (estático vs dinâmico, forte vs fraco), escopo léxico e dinâmico, tempo de vida de variáveis e gerenciamento de memória (pilha, heap e garbage collection). Mecanismos de controle de fluxo, avaliação preguiçosa (lazy evaluation), funções de alta ordem e closures."
   },
   {
     "id": 51,
@@ -590,7 +644,8 @@
       "QXD0013",
       "QXD0010"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos de arquiteturas e computação paralela: taxonomia de Flynn, métricas de desempenho (speedup, eficiência, Lei de Amdahl e Lei de Gustafson). Modelos de programação paralela com memória compartilhada (OpenMP e Pthreads) e memória distribuída (MPI - Message Passing Interface). Programação paralela em aceleradores massivos e GPUs (CUDA / OpenCL). Padrões de projeto para algoritmos paralelos: decomposição de tarefas, sincronização e comunicação. Problemas clássicos e otimização de desempenho."
   },
   {
     "id": 52,
@@ -602,7 +657,8 @@
     "prerequisitos": [
       "QXD0008"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Definição e representação computacional de grafos e dígrafos (matriz de adjacência, lista de adjacência). Graus, caminhos, ciclos e conectividade. Árvores e florestas: propriedades, árvores geradoras mínimas (algoritmos de Kruskal e Prim). Caminhos mínimos: algoritmos de Dijkstra, Bellman-Ford e Floyd-Warshall. Busca em grafos: busca em largura (BFS) e em profundidade (DFS) e aplicações (ordenação topológica e componentes fortemente conexos). Fluxo em redes e emparelhamento. Coloração de grafos e planaridade."
   },
   {
     "id": 53,
@@ -615,7 +671,8 @@
       "QXD0008",
       "QXD0010"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Análise assintótica de complexidade de tempo e espaço (notações O, Omega e Theta). Resolução de equações de recorrência (Teorema Mestre e árvore de recursão). Técnicas de projeto de algoritmos: Divisão e Conquista, Algoritmos Gulosos (Greedy), Programação Dinâmica e Backtracking com Branch-and-Bound. Análise amortizada. Teoria da complexidade computacional: classes P, NP, NP-Completo e NP-Difícil. Reduções polinomiais e problemas clássicos NP-completos."
   },
   {
     "id": 54,
@@ -627,7 +684,8 @@
     "prerequisitos": [
       "QXD0144"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos de sistemas de comunicação analógica e digital. Representação de sinais no domínio do tempo e frequência. Modulações analógicas de amplitude (AM-DSB, AM-SSB, AM convencional) e angular (FM e PM). Conversão analógico-digital: amostragem, quantização uniforme e não uniforme (Lei A / Lei Mu) e codificação PCM. Modulações digitais em banda básica (códigos de linha e interferência intersimbólica - ISI) e modulações por portadora (ASK, FSK, PSK, QAM). Noções de ruído térmico e relação sinal-ruído (SNR)."
   },
   {
     "id": 55,
@@ -639,7 +697,8 @@
     "prerequisitos": [
       "QXD0040"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Modelos formais de computação: Máquinas de Turing determinísticas e não-determinísticas. Tese de Church-Turing. Decidibilidade e decidibilidade de linguagens: o Problema da Parada (Halting Problem) e problemas indecidíveis. Redutibilidade por mapeamento e Teorema de Rice. Teoria da Complexidade: tempo e espaço de computação, classes P, NP, PSPACE, NP-completude e problemas intratáveis."
   },
   {
     "id": 56,
@@ -649,9 +708,11 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0116"
+      "QXD0116",
+      "QXD0010"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos de computação gráfica e pipeline de renderização 2D e 3D. Primitivas gráficas e rasterização (algoritmo de Bresenham). Transformações geométricas 2D e 3D no espaço homogêneo: translação, rotação, escala e projeções (ortográfica e perspectiva). Câmeras virtuais e recorte (clipping). Modelagem geométrica de objetos 3D e malhas poligonais. Modelos de iluminação local (Phong e Blinn-Phong) e sombreamento (Flat, Gouraud e Phong). Mapeamento de texturas. Programação de shaders e uso de APIs gráficas modernas (OpenGL / WebGL)."
   },
   {
     "id": 57,
@@ -663,7 +724,8 @@
     "prerequisitos": [
       "QXD0021"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Arquitetura de protocolos de rede e telecomunicações. Técnicas de especificação e verificação formal de protocolos (redes de Petri e FSMs). Mecanismos de controle de erro (ARQ: Stop-and-Wait, Go-Back-N, Selective Repeat) e controle de fluxo. Protocolos de roteamento avançados (interdomínio BGP, MPLS). Qualidade de Serviço (QoS) e engenharia de tráfego. Protocolos de segurança em rede: SSL/TLS, IPsec e SSH. Protocolos para Internet das Coisas (CoAP, MQTT, LoRaWAN)."
   },
   {
     "id": 58,
@@ -675,7 +737,8 @@
     "prerequisitos": [
       "QXD0021"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos de sistemas de comunicação celular: reuso de frequências, capacidade do canal, handoff e interferência co-canal. Propagação em canal rádio móvel: desvanecimento em larga escala (perda de percurso e sombreamento) e pequena escala (Rayleigh e Rician). Evolução das redes celulares móveis: 2G/GSM, 3G/UMTS, 4G/LTE e 5G NR. Tecnologias de acesso múltiplo: FDMA, TDMA, CDMA e OFDM/OFDMA. Técnicas de antenas múltiplas (MIMO) e arquiteturas de redes sem fio atuais."
   },
   {
     "id": 59,
@@ -687,7 +750,8 @@
     "prerequisitos": [
       "QXD0151"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Introdução à robótica industrial e manipuladores robóticos. Cinemática direta de manipuladores: representação de orientação e posição no espaço tridimensional, matrizes de transformação homogênea e convenção de Denavit-Hartenberg (D-H). Cinemática inversa: métodos analíticos e geométricos. Jacobiano geométrico e analítico, velocidades e singularidades cinemáticas. Geração e interpolação de trajetórias no espaço das juntas e cartesiano. Introdução ao ROS (Robot Operating System)."
   },
   {
     "id": 60,
@@ -699,7 +763,8 @@
     "prerequisitos": [
       "QXD0240"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Dinâmica de manipuladores robóticos: formulações de Euler-Lagrange e Newton-Euler. Controle de robôs: controle de posição no espaço das juntas (PD, PID), controle por torque computado e controle de força/impedância. Robótica móvel: cinemática de robôs com rodas (modelos uniciclo e diferencial). Sensores para robótica móvel (LIDAR, câmeras, ultrassom, IMU). Algoritmos de localização e mapeamento simultâneos (SLAM). Planejamento de caminhos e desvio de obstáculos (campos potenciais e algoritmos A*/RRT)."
   },
   {
     "id": 61,
@@ -709,7 +774,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceitos fundamentais de empreendedorismo e inovação tecnológica. Perfil e competências do empreendedor. Identificação e validação de oportunidades de mercado. Metodologia Lean Startup e Customer Development. Modelagem de negócios com Business Model Canvas (BMC). Estratégias de marketing, precificação e análise de viabilidade financeira. Propriedade intelectual, registro de patentes e fontes de financiamento (investidores anjo, capital de risco, editais de fomento). Elaboração de pitch e plano de negócios."
   },
   {
     "id": 62,
@@ -718,8 +784,11 @@
     "semestre": null,
     "creditos": 4,
     "cargaHoraria": 64,
-    "prerequisitos": [],
-    "area": "Optativas"
+    "prerequisitos": [
+      "QXD0010"
+    ],
+    "area": "Optativas",
+    "ementa": "Conceitos de Sistemas de Gerenciamento de Banco de Dados (SGBD). Modelagem conceitual com Diagrama Entidade-Relacionamento (DER). Modelo relacional: tabelas, chaves primárias e estrangeiras, integridade referencial. Álgebra relacional. Linguagem SQL: DDL (criação e alteração de tabelas), DML (consultas simples, joins, subconsultas, agrupamentos) e DCL. Teoria da normalização: formas normais (1FN, 2FN, 3FN e BCNF). Transações, propriedades ACID, concorrência e introdução a bancos de dados NoSQL."
   },
   {
     "id": 63,
@@ -729,7 +798,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos de Interação Humano-Computador (IHC) e experiência do usuário (UX). Fatores humanos, cognitivos e ergonômicos no design de interfaces. Processos de design centrado no usuário (Design Thinking, Design Sprint). Técnicas de levantamento e modelagem de usuários (Personas, Cenários, Jornadas). Prototipagem de baixa, média e alta fidelidade (wireframes e mockups interativos). Heurísticas de usabilidade de Nielsen e princípios de acessibilidade (WCAG). Métodos de avaliação de usabilidade: inspeção e testes empíricos com usuários."
   },
   {
     "id": 64,
@@ -740,9 +810,11 @@
     "cargaHoraria": 64,
     "prerequisitos": [
       "QXD0012",
-      "QXD0010"
+      "QXD0010",
+      "QXD0116"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceitos e fundamentos de Aprendizado de Máquina. Pré-processamento de dados, engenharia de atributos e métricas de avaliação (acurácia, precisão, revocação, F1-score, curva ROC/AUC). Aprendizado Supervisionado: Regressão Linear e Logística, K-Vizinhos mais Próximos (KNN), Árvores de Decisão, Random Forests, Support Vector Machines (SVM) e Naive Bayes. Aprendizado Não-Supervisionado: Agrupamento com K-Means, DBSCAN e redução de dimensionalidade (PCA). Introdução a Redes Neurais Artificiais e Deep Learning."
   },
   {
     "id": 65,
@@ -752,9 +824,11 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0116"
+      "QXD0116",
+      "QXD0010"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos de imagem digital: amostragem, quantização e representação matricial. Espaços de cor (RGB, HSV, Grayscale). Transformações pontuais e realce de contraste (equalização de histograma). Filtragem espacial no domínio do espaço: filtros de suavização, filtros passa-baixas e passa-altas, detecção de bordas (Sobel, Prewitt, Canny). Filtragem no domínio da frequência usando Transformada de Fourier 2D. Operações morfológicas (erosão, dilatação, abertura e fechamento). Segmentação de imagens e binarização (método de Otsu)."
   },
   {
     "id": 66,
@@ -764,9 +838,11 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
-      "QXD0116"
+      "QXD0116",
+      "QXD0010"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceitos fundamentais de visão computacional. Formação de imagem, modelo de câmera pinhole e calibração de câmeras. Extração e correspondência de características locais (SIFT, SURF, ORB). Geometria de múltiplas vistas: matriz essencial, matriz fundamental e visão estéreo para reconstrução 3D. Rastreamento de objetos e fluxo óptico. Detecção e reconhecimento de padrões visuais utilizando Redes Neurais Convolucionais (CNNs - YOLO, Faster R-CNN) para detecção e segmentação de objetos."
   },
   {
     "id": 67,
@@ -778,7 +854,8 @@
     "prerequisitos": [
       "QXD0012"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Metodologia para avaliação e análise de desempenho de sistemas computacionais e redes. Métricas de desempenho: throughput, tempo de resposta, utilização e disponibilidade. Técnicas de medição e perfilamento (profiling) de hardware e software. Projeto de experimentos e análise estatística comparativa de dados. Teoria das Filas: sistemas M/M/1, M/M/m e redes de filas. Simulação computacional de eventos discretos: geração de números pseudoaleatórios e validação de modelos."
   },
   {
     "id": 68,
@@ -787,8 +864,12 @@
     "semestre": null,
     "creditos": 4,
     "cargaHoraria": 64,
-    "prerequisitos": [],
-    "area": "Optativas"
+    "prerequisitos": [
+      "QXD0040",
+      "QXD0010"
+    ],
+    "area": "Optativas",
+    "ementa": "Estrutura e fases de um compilador: análise léxica, análise sintática, análise semântica, geração de código intermediário, otimização de código e geração de código alvo. Analisadores léxicos: expressões regulares e ferramentas (Lex/Flex). Analisadores sintáticos: gramáticas livres de contexto, métodos Top-Down (LL) e Bottom-Up (LR/LALR) e ferramentas (Yacc/Bison). Tabelas de símbolos e verificação de tipos. Representações intermediárias (Three-Address Code). Estratégias de alocação de registradores e otimizações de código."
   },
   {
     "id": 69,
@@ -800,7 +881,8 @@
     "prerequisitos": [
       "QXD0144"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceitos de sinais e sistemas discretos no tempo. Transformada Discreta de Fourier (DFT) e Algoritmo da Transformada Rápida de Fourier (FFT). Análise espectral de sinais discretos. Projeto de filtros digitais com resposta finita ao impulso (FIR): métodos de janelas e amostragem em frequência. Projeto de filtros digitais com resposta infinita ao impulso (IIR): transformações bilinear e invariância ao impulso a partir de filtros analógicos (Butterworth/Chebyshev). Efeitos de comprimento de palavra finito e implementação prática em processadores digitais de sinais (DSPs)."
   },
   {
     "id": 70,
@@ -810,7 +892,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Aspectos históricos, culturais e legais da comunidade surda no Brasil e a Língua Brasileira de Sinais (Libras). Parâmetros fonológicos e morfológicos da Libras: configuração de mãos, ponto de articulação, movimento, orientação e expressões não manuais (faciais e corporais). Alfabeto datilológico e numerais. Aquisição de vocabulário e estruturas sintáticas básicas da Libras. Prática de comunicação em Libras e promoção da acessibilidade e inclusão social."
   },
   {
     "id": 71,
@@ -820,7 +903,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Estudo das relações étnico-raciais e da história e cultura afro-brasileira e indígena no contexto nacional. Construção social do conceito de raça, racismo estrutural e institucional. Legislação brasileira sobre igualdade racial (Lei 10.639/03 e Estatuto da Igualdade Racial). Contribuições históricas, científicas, culturais e tecnológicas dos povos africanos e indígenas. Políticas de ações afirmativas, diversidade e combate ao preconceito na sociedade e no ambiente profissional."
   },
   {
     "id": 72,
@@ -830,7 +914,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos da questão ambiental e do desenvolvimento sustentável. Ecologia básica, ciclos biogeoquímicos e biodiversidade. Impactos das atividades humanas e da indústria tecnológica sobre o meio ambiente: consumo energético, pegada de carbono e lixo eletrônico (e-waste). Legislação ambiental e gestão de resíduos sólidos. Tecnologias verdes (Green IT), economia circular e responsabilidade socioambiental na prática da Engenharia de Computação."
   },
   {
     "id": 73,
@@ -840,7 +925,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceito, evolução histórica e princípios fundamentais dos Direitos Humanos. Declaração Universal dos Direitos Humanos e tratados internacionais. Direitos civis, políticos, sociais, econômicos e culturais na sociedade contemporânea. Cidadania, democracia, igualdade de gênero, diversidade e inclusão de minorias. Impacto da tecnologia e da inteligência artificial nos direitos fundamentais: privacidade, vigilância, viés algorítmico e ética digital."
   },
   {
     "id": 74,
@@ -852,7 +938,8 @@
     "prerequisitos": [
       "QXD0006"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Medições físicas e grandezas vetoriais. Cinemática escalar e vetorial em uma e duas dimensões: movimento retilíneo, movimento de projéteis e movimento circular. Dinâmica da partícula: Leis de Newton e forças fundamentais (gravidade, atrito, elástica). Trabalho, energia cinética, energia potencial e princípio de conservação da energia mecânica. Momento linear, colisões elásticas e inelásticas e conservação do momento. Rotação de corpos rígidos: momento de inércia, torque e momento angular."
   },
   {
     "id": 75,
@@ -864,7 +951,8 @@
     "prerequisitos": [
       "QXD0001"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Paradigmas de orientação a objetos: classes, objetos, atributos e métodos. Encapsulamento, modificadores de acesso e abstração. Construtores e destrutores. Herança simples e múltipla, interfaces e classes abstratas. Polimorfismo estático (sobrecarga) e dinâmico (sobreescrita). Tratamento de exceções e erros em tempo de execução. Coleções genéricas de dados e estruturas de dados padrão. Boas práticas de programação e princípios básicos de design orientado a objetos."
   },
   {
     "id": 76,
@@ -877,7 +965,8 @@
       "QXD0041",
       "QXD0116"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Introdução à modelagem matemática para tomada de decisão e otimização. Programação Linear (PL): formulação de problemas clássicos (produção, transporte, mistura e alocação de recursos). Método Simplex primal e duas fases para resolução de modelos de PL. Teoria da dualidade e análise de sensibilidade pós-ótima. Programação Linear Inteira e Mista: métodos de Branch-and-Bound e planos de corte. Modelos de redes e fluxo máximo. Aplicações práticas com solvers computacionais."
   },
   {
     "id": 77,
@@ -887,9 +976,11 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [
+      "QXD0010",
       "QXD0017"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "História, fundamentos e paradigmas da Inteligência Artificial. Agentes inteligentes e ambientes de tarefas. Resolução de problemas por busca no espaço de estados: busca cega (largura, profundidade, custo uniforme) e busca heurística informada (A*, Greedy Best-First). Busca competitiva e jogos (Minimax e poda Alfa-Beta). Problemas de Satisfação de Restrições (CSP). Representação do conhecimento e raciocínio lógico. Raciocínio sob incerteza e Redes Bayesianas. Introdução ao aprendizado de máquina e IA contemporânea."
   },
   {
     "id": 78,
@@ -901,7 +992,8 @@
     "prerequisitos": [
       "QXD0021"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceitos fundamentais de segurança da informação: confidencialidade, integridade, disponibilidade e autenticidade. Ameaças, vulnerabilidades, ataques clássicos (malware, phishing, DoS/DDoS, injeção de código, man-in-the-middle). Criptografia simétrica e assimétrica, funções hash criptográficas e assinaturas digitais. Infraestrutura de Chaves Públicas (PKI) e certificados digitais. Mecanismos de autenticação e controle de acesso. Segurança de redes: firewalls, IDS/IPS e VPNs. Práticas de desenvolvimento seguro e análise de vulnerabilidades."
   },
   {
     "id": 79,
@@ -914,7 +1006,8 @@
       "QXD0041",
       "QXD0116"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Problemas de otimização em grafos e conjuntos discretos. Modelagem matemática de problemas NP-difíceis: Caixeiro Viajante (TSP), Mochila (Knapsack), Coloração de Vértices e Cobertura de Conjuntos. Algoritmos exatos: Branch-and-Bound, Branch-and-Cut e Programação Dinâmica. Heurísticas construtivas e de melhoria local. Meta-heurísticas modernas: Simulated Annealing, Algoritmos Genéticos, Busca Tabu e Otimização por Enxame de Partículas (PSO). Aplicações práticas na engenharia."
   },
   {
     "id": 80,
@@ -924,7 +1017,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Evolução do pensamento administrativo: teorias clássica, científica, burocrática e das relações humanas. Funções fundamentais da administração: planejamento, organização, direção e controle (PODC). Estrutura organizacional e departamentalização. Comportamento organizacional, liderança, motivação e trabalho em equipe. Planejamento estratégico: análise SWOT, missão, visão e objetivos corporativos. Noções de gestão de processos, qualidade e inovação nas organizações de tecnologia."
   },
   {
     "id": 81,
@@ -934,7 +1028,8 @@
     "creditos": 4,
     "cargaHoraria": 64,
     "prerequisitos": [],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Matemática financeira básica: juros simples e compostos, taxas nominais, efetivas e equivalentes, séries de pagamentos e amortizações (Sistemas SAC e Price). Análise de investimentos: Valor Presente Líquido (VPL), Taxa Interna de Retorno (TIR), Payback simples e descontado. Demonstrações financeiras básicas: Balanço Patrimonial, Demonstração do Resultado do Exercício (DRE) e Fluxo de Caixa. Gestão do capital de giro e custos operacionais em empresas de base tecnológica."
   },
   {
     "id": 82,
@@ -948,7 +1043,8 @@
       "QXD0012",
       "QXD0041"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Processo de Descoberta de Conhecimento em Bases de Dados (KDD). Coleta, limpeza, integração, transformação e redução de dados. Mineração de padrões frequentes e regras de associação (algoritmos Apriori e FP-Growth). Técnicas avançadas de classificação e regressão. Algoritmos de agrupamento (clustering) baseados em densidade, partição e hierarquia. Detecção de anomalias e outliers. Mineração de texto (Text Mining) e aplicações com grandes volumes de dados (Big Data)."
   },
   {
     "id": 83,
@@ -960,7 +1056,8 @@
     "prerequisitos": [
       "QXD0041"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Fundamentos matemáticos da criptografia: teoria dos números, aritmética modular, corpos finitos e testes de primalidade. Criptografia clássica e criptoanálise. Criptossistemas de chave simétrica: cifras de fluxo e cifras de bloco (DES, AES) e modos de operação (CBC, CTR, GCM). Criptossistemas de chave pública: RSA, Diffie-Hellman e Criptografia em Curvas Elípticas (ECC). Funções de hash criptográficas (família SHA-2, SHA-3) e códigos de autenticação de mensagem (HMAC). Protocolos criptográficos e criptografia pós-quântica."
   },
   {
     "id": 84,
@@ -972,7 +1069,8 @@
     "prerequisitos": [
       "QXD0001"
     ],
-    "area": "Optativas"
+    "area": "Optativas",
+    "ementa": "Conceitos e características de linguagens de script interpretadas de alto nível (Python, Shell Script/Bash). Tipos dinâmicos, estruturas de dados nativas (listas, tuplas, dicionários e conjuntos) e compreensão de coleções. Manipulação de arquivos, expressões regulares e automação de tarefas do sistema operacional. Desenvolvimento de scripts para web scraping, chamadas a APIs REST, análise e manipulação de dados com bibliotecas científicas (Pandas, NumPy). Criação de utilitários de linha de comando."
   },
   {
     "id": 85,
@@ -982,7 +1080,8 @@
     "creditos": 2,
     "cargaHoraria": 32,
     "prerequisitos": [],
-    "area": "Humanas e Gestão"
+    "area": "Humanas e Gestão",
+    "ementa": "Fundamentos da ética e moral aplicados à engenharia e tecnologia. Código de ética profissional do sistema CONFEA/CREA. Propriedade intelectual, direitos autorais de software e patentes de tecnologia. Contratos e relações jurídicas de software. Crimes digitais, segurança e privacidade na sociedade da informação."
   },
   {
     "id": 86,
@@ -992,7 +1091,8 @@
     "creditos": 2,
     "cargaHoraria": 32,
     "prerequisitos": [],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Panorama geral da Engenharia de Computação, atribuições profissionais e mercado de trabalho. Áreas de atuação em hardware, software e telecomunicações. Estrutura do curso na UFC e perfil profissional do formando. Metodologias básicas de projeto e resolução de problemas de engenharia."
   },
   {
     "id": 87,
@@ -1004,7 +1104,8 @@
     "prerequisitos": [
       "QXD0013"
     ],
-    "area": "Sistemas de Computação"
+    "area": "Sistemas de Computação",
+    "ementa": "Tópicos avançados em sistemas operacionais. Arquiteturas de núcleos de SO (monolíticos, micronúcleos, exonúcleos e híbridos). Virtualização e hipervisores (Tipo 1 e Tipo 2), contêineres e isolamento de recursos (cgroups, namespaces). Sistemas de arquivos avançados (journaling, ZFS, Btrfs). Gerenciamento de energia e escalonamento em sistemas multinúcleo heterogêneos. Sistemas operacionais para dispositivos móveis e embarcados."
   },
   {
     "id": 88,
@@ -1016,7 +1117,8 @@
     "prerequisitos": [
       "QXD0117"
     ],
-    "area": "Hardware e Sistemas"
+    "area": "Hardware e Sistemas",
+    "ementa": "Projeto de sistemas digitais de alta performance em linguagens de descrição de hardware (VHDL/Verilog). Síntese lógica e implementação em dispositivos FPGA. Projeto de controladores digitais, datapaths dedicados e barramentos de comunicação interna. Técnicas de verificação e simulação de circuitos digitais."
   },
   {
     "id": 89,
@@ -1028,7 +1130,8 @@
     "prerequisitos": [
       "QXD0010"
     ],
-    "area": "Programação e Software"
+    "area": "Programação e Software",
+    "ementa": "Processos de software e metodologias ágeis (Scrum, Kanban). Elicitação, especificação e validação de requisitos de software. Modelagem orientada a objetos com UML. Padrões de arquitetura e projeto. Testes de software (unitários e de integração) e garantia de qualidade."
   },
   {
     "id": 90,
@@ -1037,7 +1140,10 @@
     "semestre": null,
     "creditos": 4,
     "cargaHoraria": 64,
-    "prerequisitos": [],
-    "area": "Optativas"
+    "prerequisitos": [
+      "QXD0136"
+    ],
+    "area": "Optativas",
+    "ementa": "Propagação de ondas eletromagnéticas no espaço livre e em meios materiais. Linhas de transmissão: parâmetros distribuídos, impedância característica, reflexão, onda estacionária e Carta de Smith. Guias de ondas e cavidades ressonantes. Fundamentos de antenas e radiação eletromagnética: potencial vetor, dipolo infinitesimal e dipolo de meia onda. Parâmetros fundamentais de antenas: diagrama de radiação, diretividade, ganho, impedância de entrada, polarização e largura de feixe. Arranjos de antenas e enlace de rádio (Equação de Friis)."
   }
 ]

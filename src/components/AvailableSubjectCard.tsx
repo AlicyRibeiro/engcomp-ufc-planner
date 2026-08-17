@@ -1,4 +1,5 @@
-import { BookOpen, Check, ArrowRight, Clock, Lock, Unlock, CheckCircle, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { BookOpen, Check, ArrowRight, Clock, Lock, Unlock, CheckCircle, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
 import { Disciplina, StatusDisciplina } from '../types';
 import { curriculumService, EQUIVALENCIAS } from '../services/curriculumService';
 
@@ -23,6 +24,8 @@ const areaColors: Record<string, { bg: string; text: string; border: string }> =
 };
 
 export function AvailableSubjectCard({ disciplina, status, onMarkConcluida, onMarkCursando, onRemove, concluidas }: AvailableSubjectCardProps) {
+  const [showEmenta, setShowEmenta] = useState(false);
+
   // Look up full names of prerequisites
   const getPrereqNames = (prereqs: string[]) => {
     return prereqs.map(code => {
@@ -111,6 +114,25 @@ export function AvailableSubjectCard({ disciplina, status, onMarkConcluida, onMa
             </p>
           </div>
         </div>
+
+        {/* Ementa preview / toggle */}
+        {disciplina.ementa && (
+          <div className="mt-3">
+            <button
+              onClick={() => setShowEmenta(!showEmenta)}
+              className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors cursor-pointer py-1"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>{showEmenta ? 'Ocultar Ementa' : 'Ver Ementa do Curso'}</span>
+              {showEmenta ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            </button>
+            {showEmenta && (
+              <div className="mt-1.5 p-3 rounded-lg bg-slate-50/90 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800/60 text-xs text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
+                {disciplina.ementa}
+              </div>
+            )}
+          </div>
+        )}
 
         {prereqDetails.length > 0 ? (
           <div className="mt-3.5 pt-3.5 border-t border-slate-200/10 dark:border-slate-800/60">
