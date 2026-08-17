@@ -6,7 +6,7 @@
 
 ## ✨ Funcionalidades Principais
 
-*    **Fluxograma Interativo Inteligente (`@xyflow/react`)**: 
+*    **Fluxograma Interativo Inteligente**: 
     Visualize o fluxo completo de disciplinas do curso através de um grafo interativo. Os nós reagem dinamicamente de acordo com o status da disciplina (Concluída, Em Curso, Disponível, Bloqueada por pré-requisitos).
 *    **Importação Inteligente de Histórico (SIGAA)**: 
     Permite importar o texto copiado do seu histórico do SIGAA. O sistema processa as informações automaticamente para preencher seu progresso, notas e IRA.
@@ -32,7 +32,7 @@ A aplicação foi desenvolvida utilizando as melhores e mais modernas práticas 
 *   **Estilização**: [Tailwind CSS v4](https://tailwindcss.com/) — Alta performance e estilização moderna.
 *   **Visualização de Fluxos**: [XYFlow (React Flow)](https://reactflow.dev/) — Motor robusto para renderização do grafo interativo de disciplinas.
 *   **Animações**: [Motion](https://motion.dev/) — Micro-interações e transições fluidas de interface.
-*   **Geração de Relatórios**: [jsPDF](https://rawgit.com/MrRio/jsPDF/master/docs/index.html) & [html2canvas](https://html2canvas.hertzen.com/) — Motores de exportação com correção automática de perfis de cor modernos (`oklch`/`oklab`).
+*   **Geração de Relatórios**: [jsPDF](https://rawgit.com/MrRio/jsPDF/master/docs/index.html) & [html2canvas](https://html2canvas.hertzen.com/) — Motores de exportação com correção automática de perfis de cor modernos.
 
 ---
 
